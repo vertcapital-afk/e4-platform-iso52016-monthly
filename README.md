@@ -13,10 +13,8 @@ reference buildings and four cities.
 ```
 resultados/     complete factorial results (64 evaluations) and all
                 sensitivity experiments reported in the article
-figures/        figure-generation and statistics scripts
 scripts/        production and verification scripts
 fixtures/       verification fixtures and expected outputs
-docs/           parameter tables and provenance notes
 ```
 
 ### Core results
