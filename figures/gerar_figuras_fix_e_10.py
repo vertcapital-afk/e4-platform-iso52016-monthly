@@ -34,30 +34,35 @@ for i,c in enumerate(D):
     c["dH25"]=(c["nh_52016"]/c["nic_13790"]-1)*100
     c["dH13"]=(R[i][1]/R[i][0]-1)*100
 
-# ---- FIG 1 (corrigida): retítulo proxy + sem colisões ----
+# ---- FIG 1 (revista 01/08/2026): o proxy dimensional NAO separa ----
+# [01/08/2026] A versao anterior desenhava um limiar de 4 kWh/m2.a e anunciava
+# "median +93%" / "median -7%" como texto FIXO. Sob [P-alfa-A13-paridade] o
+# proxy cai de 11 para 3 celulas e deixa de separar: o criterio que carrega o
+# resultado e o gamma_C adimensional (Fig. 8). Anotacoes agora CALCULADAS.
 fig,ax=plt.subplots(figsize=(6.6,4.2))
-ax.axhline(0,color=GREY,lw=0.7); ax.axvline(4.0,color=ACC,lw=1.1,ls="--",zorder=2)
-ax.axvspan(0.5,4.0,color=ACC,alpha=0.055,zorder=0)
+ax.axhline(0,color=GREY,lw=0.7)
 for c in D:
     ax.scatter(c["nvc13"],c["dC13"],s=34,marker="s",facecolor="none",edgecolor=C13,lw=1.0,zorder=4)
     ax.scatter(c["nvc_13790"],c["dC25"],s=30,marker="o",color=C25,alpha=0.85,zorder=5)
 ex=[c for c in D if c["rb"]=="RB2" and c["cidade"]=="Bragança"][0]
-ax.annotate("RB2 / Bragança\n$N_{vc}$ = 1.03 kWh/m²·a",xy=(ex["nvc_13790"],ex["dC25"]),
-            xytext=(1.32,232),fontsize=7.5,ha="left",
+ax.annotate("RB2 / Bragança\n$N_{vc}$ = %.2f kWh/m²·a" % ex["nvc_13790"],
+            xy=(ex["nvc_13790"],ex["dC25"]),xytext=(6.5,150),fontsize=7.5,ha="left",
             arrowprops=dict(arrowstyle="-",lw=0.7,color=GREY))
 ax.set_xscale("log"); ax.set_xticks([1,2,5,10,20,50])
 ax.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
 ax.set_xlabel("Seasonal cooling need $N_{vc}$  [kWh/m²·a, log scale]")
 ax.set_ylabel("Cooling divergence  $\\Delta_C$  [%]")
-ax.set_title("A dimensional proxy for the $\\gamma_C$ criterion")
-ax.text(1.75,148,"below 4 kWh/m²·a\nmedian +93 %",fontsize=7.5,color=ACC,ha="center",style="italic")
-ax.text(15,120,"above 4 kWh/m²·a\nmedian −7 %",fontsize=7.5,color=GREY,ha="center",style="italic")
+ax.set_title("The seasonal magnitude alone does not separate the regimes")
+_n4=sum(1 for c in D if c["nvc_13790"]<4.0)
+ax.text(0.98,0.05,"only %d of 32 cells fall below 4 kWh/m²·a;\nthe separating criterion is $\\gamma_C$ (Fig. 8)"%_n4,
+        transform=ax.transAxes,fontsize=7.2,color=GREY,ha="right",style="italic")
 ax.legend(handles=[plt.Line2D([],[],marker="o",ls="",color=C25,label="DGEG2025-A base"),
- plt.Line2D([],[],marker="s",ls="",mfc="none",mec=C13,label="REG-2013 base"),
- plt.Line2D([],[],color=ACC,ls="--",label="proxy threshold, 4 kWh/m²·a")],
+ plt.Line2D([],[],marker="s",ls="",mfc="none",mec=C13,label="REG-2013 base")],
  loc="upper right",fontsize=7.2)
-ax.set_ylim(-60,395)
-for s in("top","right"): ax.spines[s].set_visible(False)
+_lo=min(min(c["dC13"] for c in D),min(c["dC25"] for c in D))
+_hi=max(max(c["dC13"] for c in D),max(c["dC25"] for c in D))
+ax.set_ylim(_lo-25,_hi+45)
+for s_ in("top","right"): ax.spines[s_].set_visible(False)
 fig.savefig(f"{OUT}/Fig1_cooling_threshold.png"); plt.close(fig)
 
 # ---- FIG 2 (corrigida): nomes completos no painel c ----

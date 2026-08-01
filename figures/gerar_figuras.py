@@ -20,6 +20,7 @@ def _decomp(base_2013=False):
 e da tabela REG-2013 do Handoff_Artigo13_08.md §2.2. Nenhum recálculo físico."""
 import json, os
 import numpy as np
+np.random.seed(3)   # [01/08/2026] jitter reprodutivel (Fig.2)
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -69,16 +70,14 @@ def tag(ax, s):
 # Assinatura: divergência de arrefecimento vs magnitude do resultado sazonal
 fig, ax = plt.subplots(figsize=(6.6, 4.2))
 ax.axhline(0, color=GREY, lw=0.7, ls="-", zorder=1)
-ax.axvline(4.0, color=ACC, lw=1.1, ls="--", zorder=2)
-ax.axvspan(0.5, 4.0, color=ACC, alpha=0.055, zorder=0)
 for c in D:
     ax.scatter(c["nvc13"], c["dC13"], s=34, marker="s", facecolor="none",
                edgecolor=C13, lw=1.0, zorder=4)
     ax.scatter(c["nvc_13790"], c["dC25"], s=30, marker="o", color=C25,
                alpha=0.85, zorder=5)
 ex = [c for c in D if c["rb"] == "RB2" and c["cidade"] == "Bragança"][0]
-ax.annotate("RB2 / Bragança\n$N_{vc}$ = 1.03 kWh/m²·a",
-            xy=(ex["nvc_13790"], ex["dC25"]), xytext=(1.35, 250),
+ax.annotate("RB2 / Bragança\n$N_{vc}$ = %.2f kWh/m²·a" % ex["nvc_13790"],
+            xy=(ex["nvc_13790"], ex["dC25"]), xytext=(6.0, 150),
             fontsize=7.5, color="#111", ha="left",
             arrowprops=dict(arrowstyle="-", lw=0.7, color=GREY))
 ax.set_xscale("log")
@@ -86,17 +85,15 @@ ax.set_xticks([1, 2, 5, 10, 20, 50])
 ax.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
 ax.set_xlabel("Seasonal cooling need $N_{vc}$  [kWh/m²·a, log scale]")
 ax.set_ylabel("Cooling divergence  $\\Delta_C$  [%]")
-ax.set_title("Cooling divergence is a threshold effect")
-ax.text(1.9, 330, "below threshold\nmedian +93 %", fontsize=7.5, color=ACC,
-        ha="center", style="italic")
-ax.text(20, 330, "above threshold\nmedian −7 %", fontsize=7.5, color=GREY,
-        ha="center", style="italic")
+ax.set_title("The seasonal magnitude alone does not separate the regimes")
+_n4 = sum(1 for c in D if c["nvc_13790"] < 4.0)
+ax.text(0.98, 0.06, "only %d of 32 cells fall below 4 kWh/m²·a;\nthe separating criterion is $\\gamma_C$ (Fig. 8)" % _n4,
+        transform=ax.transAxes, fontsize=7.2, color=GREY, ha="right", style="italic")
 ax.legend(handles=[
     plt.Line2D([], [], marker="o", ls="", color=C25, label="DGEG2025-A base"),
-    plt.Line2D([], [], marker="s", ls="", mfc="none", mec=C13, label="REG-2013 base"),
-    plt.Line2D([], [], color=ACC, ls="--", label="threshold, 4 kWh/m²·a")],
+    plt.Line2D([], [], marker="s", ls="", mfc="none", mec=C13, label="REG-2013 base")],
     loc="upper right", ncol=1)
-for s in ("top", "right"): ax.spines[s].set_visible(False)
+for s_ in ("top", "right"): ax.spines[s_].set_visible(False)
 fig.savefig(f"{OUT}/Fig1_cooling_threshold.png"); plt.close(fig)
 
 # ---------------------------------------------------------------- FIG 2
@@ -163,7 +160,7 @@ fig.savefig(f"{OUT}/Fig3_heatmap_dH.png"); plt.close(fig)
 fig, ax = plt.subplots(figsize=(6.0, 3.3))
 labels = ["No envelope\nparity\n(non-production)", "Unharmonised\naltitude\n(158 vs 255 m)",
           "Naive cross-base\ncomparison", "Method effect\nREG-2013", "Method effect\nDGEG2025-A"]
-vals = [70.0, 21.0, 8.2, 8.1, 14.3]
+vals = [70.0, 21.0, 11.2, 10.1, 17.4]
 cols = [GREY, GREY, GREY, C13, C25]
 bars = ax.bar(range(5), vals, color=cols, width=0.62)
 for b, a in zip(bars, [0.45, 0.45, 0.45, 0.9, 0.9]):
@@ -172,7 +169,7 @@ for i, (b, v) in enumerate(zip(bars, vals)):
     ax.text(b.get_x() + b.get_width() / 2, v + 1.6, f"+{v:.1f}%", ha="center",
             fontsize=8, fontweight="bold" if i > 2 else "normal",
             color="#111" if i > 2 else GREY)
-ax.axhspan(8.1, 14.3, color=C25, alpha=0.07, zorder=0)
+ax.axhspan(10.1, 17.4, color=C25, alpha=0.07, zorder=0)
 ax.set_xticks(range(5)); ax.set_xticklabels(labels, fontsize=7.2)
 ax.set_ylabel("Reported heating divergence  [%]")
 ax.set_title("What comparison protocol does to the reported divergence\n(RB6 / Coimbra)")
@@ -241,7 +238,9 @@ ax.text(0.5, -0.155, "Seasonal", transform=ax.get_xaxis_transform(),
 ax.text(2.5, -0.155, "Monthly", transform=ax.get_xaxis_transform(),
         ha="center", fontsize=8.5, color=C25, fontweight="bold")
 ax.set_ylabel("Heating need  [kWh/m²·a]")
-ax.set_title("Response of each method to a change of\nclimate base (median −0.1 % vs +7.0 %)",
+_ms = np.median([(c["nic_13790"]/c["nic13"]-1)*100 for c in D])
+_mm = np.median([(c["nh_52016"]/c["nh13"]-1)*100 for c in D])
+ax.set_title("Response of each method to a change of\nclimate base (median %+.1f %% vs %+.1f %%)" % (_ms, _mm),
              fontsize=9)
 for s in ("top", "right"): ax.spines[s].set_visible(False)
 fig.savefig(f"{OUT}/Fig7_base_effect_by_method.png"); plt.close(fig)

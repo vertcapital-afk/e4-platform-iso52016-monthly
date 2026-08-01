@@ -38,15 +38,26 @@ for c in d:
                facecolor=C25 if c["rb"] in("RB1","RB2","RB3","RB4") else "none",
                edgecolor=C25,lw=1.0,alpha=0.9,zorder=4)
 ex=next(c for c in d if c["rb"]=="RB2" and c["cidade"]=="Bragança")
-ax.annotate("RB2 / Bragança",xy=(ex["gamma_C_sazonal"],ex["dC"]),xytext=(0.72,300),
+ax.annotate("RB2 / Bragança",xy=(ex["gamma_C_sazonal"],ex["dC"]),xytext=(0.72, max(c["dC"] for c in d)*0.98),
             fontsize=7.5,arrowprops=dict(arrowstyle="-",lw=0.7,color=GREY))
 ax.set_xscale("log"); ax.set_xticks([0.4,0.6,0.8,1.0,1.5,2,3])
 ax.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
 ax.set_xlabel("Seasonal heat-balance ratio  $\\gamma_C$  [–, log scale]")
 ax.set_ylabel("Cooling divergence  $\\Delta_C$  [%]")
 ax.set_title("The sign of the cooling divergence is set by $\\gamma_C$")
-ax.text(0.62,235,"$\\gamma_C<1$: gains below losses\n18/18 positive below 0.9\nmedian +77 %",fontsize=7.5,color=ACC,ha="center",style="italic")
-ax.text(2.1,235,"$\\gamma_C\\geq1$\n11/11 negative\nmedian −25 %",fontsize=7.5,color=GREY,ha="center",style="italic")
+# [01/08/2026] Segmentacao CALCULADA dos dados -- era texto fixo, e sob
+# [P-alfa-A13-paridade] os numeros mudaram de lado (14/14 e 16/18).
+import statistics as _st
+_lt = [c for c in d if c["gamma_C_sazonal"] < 1.0]
+_ge = [c for c in d if c["gamma_C_sazonal"] >= 1.0]
+_pos = sum(1 for c in _lt if c["dC"] > 0); _neg = sum(1 for c in _ge if c["dC"] < 0)
+_ytxt = max(c["dC"] for c in d) * 0.78
+ax.text(0.62,_ytxt,"$\\gamma_C<1$: gains below losses\n%d/%d positive\nmedian %+.0f %%"
+        % (_pos,len(_lt),_st.median([c["dC"] for c in _lt])),
+        fontsize=7.5,color=ACC,ha="center",style="italic")
+ax.text(2.1,_ytxt,"$\\gamma_C\\geq1$\n%d/%d negative\nmedian %+.0f %%"
+        % (_neg,len(_ge),_st.median([c["dC"] for c in _ge])),
+        fontsize=7.5,color=GREY,ha="center",style="italic")
 h=[plt.Line2D([],[],marker=mk[k],ls="",color=C25,label=k) for k in CITIES]
 h+=[plt.Line2D([],[],marker="o",ls="",color=C25,label="SFH (filled)"),
     plt.Line2D([],[],marker="o",ls="",mfc="none",mec=C25,label="MFH (open)")]
@@ -74,7 +85,8 @@ pair(axes[2],[c["eta_H_sazonal"] for c in d],[c["eta_H_mensal_med"] for c in d],
      "seasonal","monthly","Gain utilisation $\\eta_H$","–")
 axes[3].bar([0],[np.median([c["Q_sky_share"] for c in d])*100],color=C25,width=0.5,alpha=0.85)
 axes[3].scatter(np.random.normal(0,0.05,len(d)),[c["Q_sky_share"]*100 for c in d],s=7,color="#333",alpha=0.45,zorder=3,lw=0)
-axes[3].text(0,23.6,"22.8%",ha="center",va="bottom",fontsize=8,fontweight="bold")
+_sky = np.median([c["Q_sky_share"] for c in d])*100
+axes[3].text(0,_sky*1.02,"%.1f%%"%_sky,ha="center",va="bottom",fontsize=8,fontweight="bold")
 axes[3].set_xticks([0]); axes[3].set_xticklabels(["monthly\nonly"],fontsize=7.5)
 axes[3].set_title("Sky radiation $Q_{sky}$",fontsize=8.8); axes[3].set_ylabel("% of gross solar gains",fontsize=8)
 axes[3].set_xlim(-0.5,0.5)
