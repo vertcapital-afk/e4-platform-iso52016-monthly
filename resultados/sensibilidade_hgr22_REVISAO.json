@@ -1,0 +1,328 @@
+{
+  "meta": {
+    "experiencia": "sensibilidade +-22% Hgr -- REVISTO",
+    "config": "[P-alfa-A13-paridade]"
+  },
+  "celulas": [
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB1",
+      "cidade": "Coimbra",
+      "dH_base": 12.34,
+      "dH_hgr_mais22": 12.97,
+      "dH_hgr_menos22": 11.7,
+      "deslocamento_max_pp": 0.64,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB2",
+      "cidade": "Coimbra",
+      "dH_base": 6.22,
+      "dH_hgr_mais22": 7.01,
+      "dH_hgr_menos22": 5.43,
+      "deslocamento_max_pp": 0.79,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB3",
+      "cidade": "Coimbra",
+      "dH_base": 25.07,
+      "dH_hgr_mais22": 26.14,
+      "dH_hgr_menos22": 24.01,
+      "deslocamento_max_pp": 1.07,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB4",
+      "cidade": "Coimbra",
+      "dH_base": 30.82,
+      "dH_hgr_mais22": 32.18,
+      "dH_hgr_menos22": 29.47,
+      "deslocamento_max_pp": 1.36,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB1",
+      "cidade": "Bragança",
+      "dH_base": 7.64,
+      "dH_hgr_mais22": 8.48,
+      "dH_hgr_menos22": 6.81,
+      "deslocamento_max_pp": 0.84,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB2",
+      "cidade": "Bragança",
+      "dH_base": 2.0,
+      "dH_hgr_mais22": 3.02,
+      "dH_hgr_menos22": 0.99,
+      "deslocamento_max_pp": 1.02,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB3",
+      "cidade": "Bragança",
+      "dH_base": 12.01,
+      "dH_hgr_mais22": 13.21,
+      "dH_hgr_menos22": 10.81,
+      "deslocamento_max_pp": 1.21,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB4",
+      "cidade": "Bragança",
+      "dH_base": 14.52,
+      "dH_hgr_mais22": 15.95,
+      "dH_hgr_menos22": 13.09,
+      "deslocamento_max_pp": 1.43,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB1",
+      "cidade": "Évora",
+      "dH_base": 0.71,
+      "dH_hgr_mais22": 1.05,
+      "dH_hgr_menos22": 0.38,
+      "deslocamento_max_pp": 0.33,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB2",
+      "cidade": "Évora",
+      "dH_base": -5.81,
+      "dH_hgr_mais22": -5.38,
+      "dH_hgr_menos22": -6.23,
+      "deslocamento_max_pp": 0.42,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB3",
+      "cidade": "Évora",
+      "dH_base": 8.52,
+      "dH_hgr_mais22": 9.15,
+      "dH_hgr_menos22": 7.9,
+      "deslocamento_max_pp": 0.63,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB4",
+      "cidade": "Évora",
+      "dH_base": 10.4,
+      "dH_hgr_mais22": 11.23,
+      "dH_hgr_menos22": 9.58,
+      "deslocamento_max_pp": 0.83,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB1",
+      "cidade": "Lisboa",
+      "dH_base": 13.09,
+      "dH_hgr_mais22": 13.58,
+      "dH_hgr_menos22": 12.59,
+      "deslocamento_max_pp": 0.5,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB2",
+      "cidade": "Lisboa",
+      "dH_base": 8.83,
+      "dH_hgr_mais22": 9.51,
+      "dH_hgr_menos22": 8.15,
+      "deslocamento_max_pp": 0.68,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB3",
+      "cidade": "Lisboa",
+      "dH_base": 46.7,
+      "dH_hgr_mais22": 47.99,
+      "dH_hgr_menos22": 45.41,
+      "deslocamento_max_pp": 1.29,
+      "muda_sinal": false
+    },
+    {
+      "base": "DGEG2025-A",
+      "rb": "RB4",
+      "cidade": "Lisboa",
+      "dH_base": 52.81,
+      "dH_hgr_mais22": 54.66,
+      "dH_hgr_menos22": 50.95,
+      "deslocamento_max_pp": 1.86,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB1",
+      "cidade": "Coimbra",
+      "dH_base": 4.89,
+      "dH_hgr_mais22": 5.61,
+      "dH_hgr_menos22": 4.18,
+      "deslocamento_max_pp": 0.72,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB2",
+      "cidade": "Coimbra",
+      "dH_base": -0.7,
+      "dH_hgr_mais22": 0.2,
+      "dH_hgr_menos22": -1.6,
+      "deslocamento_max_pp": 0.9,
+      "muda_sinal": true
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB3",
+      "cidade": "Coimbra",
+      "dH_base": 24.95,
+      "dH_hgr_mais22": 26.26,
+      "dH_hgr_menos22": 23.63,
+      "deslocamento_max_pp": 1.32,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB4",
+      "cidade": "Coimbra",
+      "dH_base": 32.24,
+      "dH_hgr_mais22": 33.93,
+      "dH_hgr_menos22": 30.56,
+      "deslocamento_max_pp": 1.69,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB1",
+      "cidade": "Bragança",
+      "dH_base": -2.21,
+      "dH_hgr_mais22": -1.49,
+      "dH_hgr_menos22": -2.94,
+      "deslocamento_max_pp": 0.73,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB2",
+      "cidade": "Bragança",
+      "dH_base": -7.09,
+      "dH_hgr_mais22": -6.2,
+      "dH_hgr_menos22": -7.98,
+      "deslocamento_max_pp": 0.89,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB3",
+      "cidade": "Bragança",
+      "dH_base": 5.32,
+      "dH_hgr_mais22": 6.43,
+      "dH_hgr_menos22": 4.21,
+      "deslocamento_max_pp": 1.11,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB4",
+      "cidade": "Bragança",
+      "dH_base": 8.82,
+      "dH_hgr_mais22": 10.15,
+      "dH_hgr_menos22": 7.49,
+      "deslocamento_max_pp": 1.33,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB1",
+      "cidade": "Évora",
+      "dH_base": -6.83,
+      "dH_hgr_mais22": -6.61,
+      "dH_hgr_menos22": -7.05,
+      "deslocamento_max_pp": 0.22,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB2",
+      "cidade": "Évora",
+      "dH_base": -12.11,
+      "dH_hgr_mais22": -11.8,
+      "dH_hgr_menos22": -12.41,
+      "deslocamento_max_pp": 0.3,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB3",
+      "cidade": "Évora",
+      "dH_base": 12.08,
+      "dH_hgr_mais22": 12.63,
+      "dH_hgr_menos22": 11.53,
+      "deslocamento_max_pp": 0.55,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB4",
+      "cidade": "Évora",
+      "dH_base": 16.97,
+      "dH_hgr_mais22": 17.73,
+      "dH_hgr_menos22": 16.19,
+      "deslocamento_max_pp": 0.77,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB1",
+      "cidade": "Lisboa",
+      "dH_base": 2.75,
+      "dH_hgr_mais22": 3.25,
+      "dH_hgr_menos22": 2.26,
+      "deslocamento_max_pp": 0.49,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB2",
+      "cidade": "Lisboa",
+      "dH_base": -1.47,
+      "dH_hgr_mais22": -0.81,
+      "dH_hgr_menos22": -2.13,
+      "deslocamento_max_pp": 0.66,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB3",
+      "cidade": "Lisboa",
+      "dH_base": 36.62,
+      "dH_hgr_mais22": 37.83,
+      "dH_hgr_menos22": 35.41,
+      "deslocamento_max_pp": 1.21,
+      "muda_sinal": false
+    },
+    {
+      "base": "REG-2013",
+      "rb": "RB4",
+      "cidade": "Lisboa",
+      "dH_base": 44.72,
+      "dH_hgr_mais22": 46.39,
+      "dH_hgr_menos22": 43.04,
+      "deslocamento_max_pp": 1.68,
+      "muda_sinal": false
+    }
+  ]
+}
