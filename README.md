@@ -4,7 +4,7 @@ This repository contains the complete factorial results, climate and
 reference-building parameterisation, verification fixtures and evaluation
 scripts supporting the study *"Separating the Method Effect from
 Comparison-Protocol Confounds in the Migration from ISO 13790 to ISO 52016-1"*
-(Tadeu, submitted to *Building and Environment*, 2026), a 64-cell factorial over
+(Tadeu, submitted, 2026), a 64-cell factorial over
 two calculation methods, two climate bases, eight Census-weighted Portuguese
 reference buildings and four cities.
 
