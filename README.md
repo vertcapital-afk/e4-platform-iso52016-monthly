@@ -3,7 +3,7 @@
 This repository contains the factorial results, intermediate quantities,
 sensitivity results and evaluation and figure scripts supporting the study
 *"Separating the Method Effect from Comparison-Protocol Confounds in the
-Migration from ISO 13790 to ISO 52016-1"* (Tadeu, submitted, 2026). This is
+Migration from ISO 13790 to ISO 52016-1"* (Tadeu, under revision, 2026). This is
 the state for revision R1 at Energy & Buildings, manuscript ENB-D-26-06604.
 The study has not been accepted or published.
 
@@ -128,7 +128,7 @@ library; the figures need numpy and matplotlib; on Windows use `py`):
 
 ```
 python scripts/verificar_revisao_a13.py                      # numerical checks of the deposited data
-python scripts/verificar_revisao_a13.py --controlo-negativo  # one negative control per check
+python scripts/verificar_revisao_a13.py --controlo-negativo  # negative controls, one or more per block
 python scripts/preparar_figuras_r1.py                        # derived JSON = fontes_HV (no writing)
 python figures/estatisticas.py --revisao                     # same output as resultados/estatisticas_R1.txt
 python figures/gerar_figuras.py --revisao
@@ -153,7 +153,19 @@ python scripts/sensibilidade_gsul_janela_HV.py --motor PATH --saida NEWFOLDER
 `verificar_revisao_a13.py` exits with a non-zero code on any failure. A check
 that needs the engine reports SKIP when the engine is not given; SKIP is not a
 pass. Each numerical anchor is the published value, and a check passes when
-the recomputed value, rounded to the anchor's digits, equals it.
+the recomputed value, rounded to the anchor's digits, equals it. Besides the
+statistics, the data checks require complete cell coverage of every result
+file and link derived fields (ratios, factors, shifts, window definitions) to
+the primary quantities, within the precision of the deposited fields. The
+negative-control mode runs the baseline first (with the engine, the physics
+checks too) and then one or more perturbations per verification block (V0–V8,
+F1–F3), each of which must fail for its expected reason.
+
+These checks validate selected statistics and derivations against declared
+references. They do not establish complete per-cell integrity of every field
+of the sensitivity results, or independent physical validation of the full
+portfolio.
+
 `verificar_artigo13.py` is the environment triage of the author's private
 package, kept with its original scope. It does not check R1 numbers, and
 without the engine it exits with code 2.
@@ -162,14 +174,13 @@ Execution log of this state (4 November 2026, Python 3.10, Linux):
 
 | Command | Result |
 |---|---|
-| `verificar_revisao_a13.py` | 57 PASS · 0 FAIL · 3 SKIP (physics, no engine) · 2 INFO; exit code 0 |
-| `verificar_revisao_a13.py --controlo-negativo` | 10/10 negative controls detected for the expected reason; exit code 0 |
-| `verificar_revisao_a13.py --motor PATH` | 71 PASS · 0 FAIL · 0 SKIP · 2 INFO; exit code 0 |
-| `verificar_revisao_a13.py --motor PATH --controlo-negativo` | 13/13 negative controls detected for the expected reason; exit code 0 |
+| `verificar_revisao_a13.py` | 76 PASS · 0 FAIL · 3 SKIP (physics, no engine) · 2 INFO; exit code 0 |
+| `verificar_revisao_a13.py --controlo-negativo` | 16/16 negative controls detected for the expected reason; exit code 0 |
+| `verificar_revisao_a13.py --motor PATH` | 90 PASS · 0 FAIL · 0 SKIP · 2 INFO; exit code 0 |
+| `verificar_revisao_a13.py --motor PATH --controlo-negativo` | 20/20 negative controls detected for the expected reason; exit code 0 |
 | `verificar_artigo13.py --motor PATH` | 37/37 PASS; exit code 0 (without the engine: not executed, exit code 2) |
 
-The same day, on Windows, the data checks and the negative controls with the
-engine gave the same counts. The three production scripts, run in full,
+The same day, on Windows, the three production scripts, run in full,
 reproduced the deposited files: 320/320 grid values; the α = 0.60 grids and
 anatomies; the 128 irradiation-window observations.
 

@@ -25,7 +25,8 @@ USO (a partir de qualquer pasta; no Windows, «py» em vez de «python»)
         em studies/a14_iso52016_horario/resultados/grelha_a14_canonica.json.
 
     python scripts/verificar_revisao_a13.py --controlo-negativo
-        Um controlo negativo por verificação: corre primeiro a linha de base,
+        Um ou mais controlos negativos por bloco de verificação (V0–V8, F1–F3):
+        corre primeiro a linha de base (com o motor, também a física),
         depois perturba os dados EM MEMÓRIA e confirma que cada verificação
         falha, e pela razão esperada. Confirma também o código de saída.
 
@@ -53,7 +54,15 @@ O QUE CADA VERIFICAÇÃO LÊ
         conta e não faz falhar. Este depósito não afirma identidade.
     V6  sensibilidade α = 0,60 (§4.4, Tabela 2)
     V7  sensibilidades da Tabela 2: Eq. (97) (§2.4), sombreamento de Verão,
-        H_gr ± 22 % (§4.4) e isolamento do termo de solo (§3.3)
+        H_gr ± 22 % (§4.4) e isolamento do termo de solo (§3.3); cobertura de
+        cada experiência e ligação dos campos derivados às grandezas primárias
+    V8  anatomia do aquecimento (§3.3): γ_H e η_H, sazonais e mensais
+
+ALCANCE
+    Estas verificações conferem estatísticas e derivações seleccionadas contra
+    referências declaradas. Não estabelecem a integridade de todos os campos de
+    todas as células das sensibilidades, nem uma validação física independente
+    do portefólio. Os controlos negativos são um ou mais por bloco de verificação.
     F1  (motor) paridade de envolvente na configuração R1 e reposição dos
         módulos partilhados depois da sobreposição em runtime
     F2  (motor) RB6/Coimbra recalculada com o leitor de hora verificada
@@ -95,6 +104,8 @@ CAMPOS_2013 = ("nic_13790_2013", "nvc_13790_2013", "nh_52016_2013", "nc_52016_20
                "nh20_52016_2013_cenario")
 JANELA_PRODUCAO = {10, 11, 12, 1, 2, 3, 4}          # Out–Abr
 JANELAS_GSUL = ("Out–Abr", "Nov–Mar", "Out–Mar", "Nov–Abr")
+JANELAS_DEF = {"Out–Abr": (10, 11, 12, 1, 2, 3, 4), "Nov–Mar": (11, 12, 1, 2, 3),
+               "Out–Mar": (10, 11, 12, 1, 2, 3), "Nov–Abr": (11, 12, 1, 2, 3, 4)}
 CONFIG_R1 = dict(alfa_parede=0.40, desvao_cob=0.0, h_ce=20.0)
 TOL_REGRESSAO = 1e-9
 AMOSTRA_A14 = ("RB1", "RB6", "RB8")                 # as 12 células do V5 histórico
@@ -103,6 +114,7 @@ FICHEIROS = {
     "grelha": "grelha_artigo13_REVISAO.json",
     "grelha13": "grelha_artigo13_2013_REVISAO.json",
     "decomp": "decomposicao_artigo13_REVISAO.json",
+    "decomp13": "decomposicao_artigo13_2013_REVISAO.json",
     "fontes": os.path.join("fontes_HV", "RESULTADO_A13_COMPLETO.json"),
     "intermed": os.path.join("fontes_HV", "INTERMEDIARIOS_A13_COMPLETO.json"),
     "cruz": "cruzamento_ingenuo_rb6_coimbra_REVISAO.json",
@@ -163,6 +175,17 @@ def por_celula(lista, nome):
         sobra = sorted(set(m) - UNIVERSO)[:3]
         raise ErroCobertura(f"{nome}: {len(m)} células; em falta {falta}; a mais {sobra}")
     return m
+
+
+def _tol_pct(a, b, k, m):
+    """Tolerância para p = 100·(a/b − 1) guardado com k casas, com a e b guardados
+    com m casas: meia unidade de p mais a propagação de meia unidade de a e de b."""
+    return 0.5 * 10 ** -k + 100 * 0.5 * 10 ** -m * (1 / abs(b) + abs(a) / b ** 2) + 1e-9
+
+
+def _tol_rat(a, b, k, m):
+    """Tolerância para f = a/b guardado com k casas, com a e b guardados com m casas."""
+    return 0.5 * 10 ** -k + 0.5 * 10 ** -m * (1 / abs(b) + abs(a) / b ** 2) + 1e-9
 
 
 def protegido(vid, nome_check):
@@ -233,11 +256,18 @@ def v0(D):
     out.append(resultado("V0", "grelha REG-2013 = fonte (controlo_REG2013) a 3 casas",
                          not dif, "integridade", f"{n - len(dif)}/{n} valores"
                          + (f"; primeiro diferente {dif[0]}" if dif else "")))
-    anat = [c["anatomia"] for c in D["intermed"]["celulas"] if c["hora"] == "verificada"]
-    out.append(resultado("V0", "decomposição DGEG2025-A = anatomia HV dos intermediários",
-                         anat == D["decomp"]["celulas"], "integridade",
-                         f"{len(anat)} células HV nos intermediários; "
-                         f"{len(D['decomp']['celulas'])} no ficheiro depositado"))
+    hv = [c for c in D["intermed"]["celulas"] if c["hora"] == "verificada"]
+    # [04/11, auditoria] cobertura exigida: duas listas vazias também eram «iguais»
+    anat = por_celula([c["anatomia"] for c in hv], "intermediários (anatomias HV)")
+    dep = por_celula(D["decomp"]["celulas"], FICHEIROS["decomp"])
+    out.append(resultado("V0", "decomposição DGEG2025-A = anatomia HV dos intermediários (32 células)",
+                         anat == dep, "integridade",
+                         f"{len(anat)} células HV nos intermediários; {len(dep)} no ficheiro depositado"))
+    dif = [(c["rb"], c["cidade"]) for c in hv
+           if round(c["gamma_C_sem_arredondar"], 3) != c["anatomia"]["gamma_C_sazonal"]]
+    out.append(resultado("V0", "γ_C da decomposição = γ_C de precisão completa, a 3 casas",
+                         not dif, "integridade", f"{len(hv) - len(dif)}/{len(hv)} células"
+                         + (f"; primeiro diferente {dif[0]}" if dif else "")))
     pe = D["pesos_estatisticas"]
     out.append(resultado("V0", "pesos do parque iguais aos de figures/estatisticas.py",
                          pe == PESO, "integridade", f"estatisticas.py: {pe}"))
@@ -313,6 +343,12 @@ def v3(D):
     out.append(resultado("V3", "janela de produção Out–Abr = meses 10, 11, 12, 1, 2, 3, 4",
                          set(jan["Out–Abr"]) == JANELA_PRODUCAO and len(jan["Out–Abr"]) == 7,
                          "janela", f"artefacto: {sorted(jan['Out–Abr'])}"))
+    # [04/11, auditoria] as quatro janelas, não só a de produção
+    dif = {j: jan.get(j) for j in JANELAS_GSUL
+           if sorted(jan.get(j) or []) != sorted(JANELAS_DEF[j]) or len(jan.get(j) or []) != len(JANELAS_DEF[j])}
+    out.append(resultado("V3", "as quatro janelas têm os meses declarados (Out–Abr, Nov–Mar, Out–Mar, Nov–Abr)",
+                         not dif and set(jan) == set(JANELAS_GSUL), "janela",
+                         "4/4 definições" if not dif else f"diferentes: {dif}"))
     gs = g["gsul_por_cidade_e_janela"]["Coimbra"]
     out.append(ancora("V3", "G_sul Coimbra, Out–Abr (produção)", gs["Out–Abr"], "96.54",
                       ("96.5", "§3.3, §4.4, Tabela 2")))
@@ -331,6 +367,31 @@ def v3(D):
     out.append(resultado("V3", "g_sul: 128 observações únicas (32 células × 4 janelas)",
                          obs == esperado and len(g["celulas"]) == 128, "cobertura",
                          f"{len(g['celulas'])} registos, {len(obs)} únicos"))
+    # [04/11, auditoria] cada observação ligada à sua janela, à fonte e à produção
+    gpc = g["gsul_por_cidade_e_janela"]
+    dif = []
+    for cid in CIDADES:
+        irr_c = D["fontes"]["climas"][cid]["irradiancia_mensal_kWh_m2"]["verificada"]
+        for j in JANELAS_GSUL:
+            ms = JANELAS_DEF[j]
+            v = sum(irr_c[str(m)]["SV"] for m in ms) / len(ms)
+            if abs(v - gpc[cid][j]) >= TOL_REGRESSAO:
+                dif.append((cid, j, gpc[cid][j], v))
+    out.append(resultado("V3", "G_sul por cidade e janela = irradiância SV da fonte HV (16 combinações)",
+                         not dif, "integridade", "16/16" if not dif else f"diferentes: {dif[:2]}"))
+    F = _fonte(D)
+    prod = {(c["rb"], c["cidade"]): c["nic"] for c in g["celulas"] if c["janela"] == "Out–Abr"}
+    dif = []
+    for c in g["celulas"]:
+        k = (c["rb"], c["cidade"])
+        if c["gsul"] != gpc[c["cidade"]][c["janela"]]:
+            dif.append((k, c["janela"], "gsul"))
+        if abs(c["delta_pct"] - 100 * (c["nic"] / prod[k] - 1)) >= TOL_REGRESSAO:
+            dif.append((k, c["janela"], "delta_pct"))
+        if c["janela"] == "Out–Abr" and abs(c["nic"] - F[k]["necessidades"]["verificada"]["nic_13790"]) >= TOL_REGRESSAO:
+            dif.append((k, c["janela"], "nic de produção ≠ fonte"))
+    out.append(resultado("V3", "por observação: G_sul da janela, Δ face à produção, e N_ic de produção = fonte HV",
+                         not dif, "integridade", "128/128 observações" if not dif else f"{len(dif)} diferentes: {dif[:2]}"))
     nm = [c["delta_pct"] for c in g["celulas"] if c["janela"] == "Nov–Mar"]
     out.append(ancora("V3", "propagação Nov–Mar em N_ic: mínimo", min(nm), "-3.2", ("-3.2", "§4.4")))
     out.append(ancora("V3", "propagação Nov–Mar em N_ic: máximo", max(nm), "4.4", ("4.4", "§4.4")))
@@ -423,21 +484,33 @@ def v6(D):
                          mudanca < 2.0, "ancora",
                          f"DGEG {st.median(dC40):.2f} → {st.median(dC):.2f}; "
                          f"REG {st.median(dC13_40):.2f} → {st.median(dC13):.2f}; maior {mudanca:.2f} pp"))
-    dec = D["decomp060"]["celulas"]
+    # [04/11, auditoria] cobertura da decomposição α=0,60 e ligação às grelhas
+    dec = list(por_celula(D["decomp060"]["celulas"], FICHEIROS["decomp060"]).values())
     menos = [c for c in dec if c["gamma_C_sazonal"] < 1]
     neg = [(c["rb"], c["cidade"]) for c in menos if c["dC"] < 0]
     out.append(resultado("V6", "α=0,60: nenhuma célula com γ_C < 1 diverge para baixo (§4.4)",
-                         len(dec) == 32 and not neg, "ancora",
+                         not neg, "ancora",
                          f"{len(menos)} células com γ_C < 1; negativas: {neg or 'nenhuma'}"))
-    taxas = []
-    for nome, chave in (("α=0,40", "decomp"), ("α=0,60", "decomp060")):
+    dif = []
+    ks4 = ("nic_13790", "nh_52016", "nvc_13790", "nc_52016")   # pela ordem de nic, nh, nvc, nc
+    for chave, grelha, ks in (("decomp", {(c["rb"], c["cidade"]): c for c in G}, ks4),
+                              ("decomp060", {(c["rb"], c["cidade"]): c for c in A}, ks4)):
+        for c in por_celula(D[chave]["celulas"], FICHEIROS[chave]).values():
+            g = grelha[(c["rb"], c["cidade"])]
+            if any(c[a] != g[b] for a, b in zip(("nic", "nh", "nvc", "nc"), ks)):
+                dif.append((chave, c["rb"], c["cidade"], "necessidades"))
+            if abs(c["dC"] - 100 * (c["nc"] / c["nvc"] - 1)) > _tol_pct(c["nc"], c["nvc"], 1, 3):
+                dif.append((chave, c["rb"], c["cidade"], "dC"))
+    out.append(resultado("V6", "decomposições α=0,40 e α=0,60: necessidades = grelhas; Δ_C derivável",
+                         not dif, "integridade", "64/64 células" if not dif else f"{len(dif)} diferentes: {dif[:2]}"))
+    for nome, chave, alvo in (("α=0,40", "decomp", "30"), ("α=0,60", "decomp060", "26")):
         cs = D[chave]["celulas"]
         bem = sum(1 for c in cs if c["gamma_C_sazonal"] >= 1 and c["dC"] < 0) + \
             sum(1 for c in cs if c["gamma_C_sazonal"] < 1 and c["dC"] > 0)
-        taxas.append(f"{nome} {bem}/{len(cs)}")
-    out.append(info("V6", "classificação pelo critério γ_C (hora verificada)",
-                    "; ".join(taxas) + ". O estado α=0,04 (29/32, versão submetida) foi "
-                    "calculado em hora de cabeçalho e não é recalculado aqui."))
+        out.append(ancora("V6", f"classificação pelo critério γ_C, {nome} (células bem classificadas de 32)",
+                          bem, alvo, (alvo, "§4.4")))
+    out.append(info("V6", "classificação na versão submetida",
+                    "α=0,04 (29/32) foi calculado em hora de cabeçalho e não é recalculado aqui."))
     return out
 
 
@@ -497,7 +570,126 @@ def v7(D):
     v = [x[f"dH_{k}_diferenca"] for x in i for k in ("dgeg", "2013")]
     out.append(resultado("V7", "isolamento do solo: a mesma direcção nas 32 avaliações (§3.3)",
                          len(v) == 32 and all(x > 0 for x in v), "ancora", f"{sum(1 for x in v if x > 0)}/{len(v)} positivas"))
+    return out + _v7_ligacoes(D)
+
+
+def _v7_ligacoes(D):
+    """[04/11, auditoria] Cobertura de cada experiência e ligação dos campos derivados
+    (Δ, factores, deslocamentos) às grandezas primárias, com a tolerância que a
+    precisão dos campos depositados permite (_tol_pct, _tol_rat)."""
+    out = []
+    G = por_celula(D["grelha"]["celulas"], FICHEIROS["grelha"])
+    G13 = por_celula(D["grelha13"]["celulas"], FICHEIROS["grelha13"])
+    DC = por_celula(D["decomp"]["celulas"], FICHEIROS["decomp"])
+    DC13 = por_celula(D["decomp13"]["celulas"], FICHEIROS["decomp13"])
+    SFH_U = {(rb, cid) for rb in ("RB1", "RB2", "RB3", "RB4") for cid in CIDADES}
+
+    def prim(c):   # (N_ic, N_H, N_vc, γ_C) da base da célula
+        if c["base"] == "DGEG2025-A":
+            g, d = G[(c["rb"], c["cidade"])], DC[(c["rb"], c["cidade"])]
+            return g["nic_13790"], g["nh_52016"], g["nvc_13790"], d["gamma_C_sazonal"]
+        g, d = G13[(c["rb"], c["cidade"])], DC13[(c["rb"], c["cidade"])]
+        return g["nic_13790_2013"], g["nh_52016_2013"], g["nvc_13790_2013"], d["gamma_C_sazonal"]
+
+    def cobre(lista, universo, nome):
+        prob = []
+        for b in ("DGEG2025-A", "REG-2013"):
+            ks = [(c["rb"], c["cidade"]) for c in lista if c.get("base") == b]
+            if len(ks) != len(set(ks)) or set(ks) != universo:
+                prob.append(f"{b}: {len(ks)} registos, {len(set(ks))} únicos")
+        return resultado("V7", f"{nome}: cobertura completa e sem repetições, nas duas bases", not prob,
+                         "cobertura", "; ".join(prob) or f"{len(universo)} + {len(universo)} células")
+
+    def pct(a, b):
+        return 100 * (a / b - 1)
+
+    # Eq. (97)
+    e = D["eq97"]["celulas"]
+    out.append(cobre(e, UNIVERSO, "Eq. (97)"))
+    dif = []
+    for c in e:
+        nic, nh, _, _ = prim(c)
+        if c["nic"] != nic or c["nh_sem_corte"] != nh:
+            dif.append((c["base"], c["rb"], c["cidade"], "N_ic/N_H ≠ grelha"))
+        for dh, n in (("dH_sem_corte", "nh_sem_corte"), ("dH_com_corte", "nh_com_corte")):
+            if abs(c[dh] - pct(c[n], c["nic"])) > _tol_pct(c[n], c["nic"], 2, 3):
+                dif.append((c["base"], c["rb"], c["cidade"], dh))
+        if abs(c["deslocamento_pp"] - (c["dH_com_corte"] - c["dH_sem_corte"])) > 0.015 + 1e-9:
+            dif.append((c["base"], c["rb"], c["cidade"], "deslocamento"))
+    out.append(resultado("V7", "Eq. (97): N_ic e N_H sem corte = grelhas; Δ e deslocamentos deriváveis",
+                         not dif, "integridade", "64/64" if not dif else f"{len(dif)} diferentes: {dif[:2]}"))
+    # Sombreamento
+    s = D["sombra"]["celulas"]
+    out.append(cobre(s, UNIVERSO, "sombreamento"))
+    dif = []
+    for c in s:
+        _, _, nvc, gC = prim(c)
+        if abs(c["nvc_com_protecao"] - nvc) > 0.00051 or abs(c["gamma_c_com_protecao"] - gC) > 0.00051:
+            dif.append((c["base"], c["rb"], c["cidade"], "com protecção ≠ grelha/decomposição"))
+        if abs(c["fator_nvc"] - c["nvc_sem_protecao"] / c["nvc_com_protecao"]) > \
+                _tol_rat(c["nvc_sem_protecao"], c["nvc_com_protecao"], 3, 4):
+            dif.append((c["base"], c["rb"], c["cidade"], "fator_nvc"))
+        if abs(c["fator_gamma_c"] - c["gamma_c_sem_protecao"] / c["gamma_c_com_protecao"]) > \
+                _tol_rat(c["gamma_c_sem_protecao"], c["gamma_c_com_protecao"], 3, 4):
+            dif.append((c["base"], c["rb"], c["cidade"], "fator_gamma_c"))
+    out.append(resultado("V7", "sombreamento: N_vc e γ_C com protecção = produção; factores = sem/com",
+                         not dif, "integridade", "64/64" if not dif else f"{len(dif)} diferentes: {dif[:2]}"))
+    # H_gr ± 22 %
+    h = D["hgr"]["celulas"]
+    out.append(cobre(h, SFH_U, "H_gr ± 22 %"))
+    dif = []
+    for c in h:
+        nic, nh, _, _ = prim(c)
+        if abs(c["dH_base"] - pct(nh, nic)) > _tol_pct(nh, nic, 2, 3):
+            dif.append((c["base"], c["rb"], c["cidade"], "dH_base ≠ grelha"))
+        m = max(abs(c["dH_hgr_mais22"] - c["dH_base"]), abs(c["dH_hgr_menos22"] - c["dH_base"]))
+        if abs(c["deslocamento_max_pp"] - m) > 0.015 + 1e-9:
+            dif.append((c["base"], c["rb"], c["cidade"], "deslocamento_max"))
+        if c["muda_sinal"] != (len({x > 0 for x in (c["dH_base"], c["dH_hgr_mais22"], c["dH_hgr_menos22"])}) > 1):
+            dif.append((c["base"], c["rb"], c["cidade"], "muda_sinal"))
+    out.append(resultado("V7", "H_gr ± 22 %: Δ de base = grelha; deslocamento e mudança de sinal deriváveis",
+                         not dif, "integridade", "32/32" if not dif else f"{len(dif)} diferentes: {dif[:2]}"))
+    # Isolamento do termo de solo
+    i = D["isol"]["celulas"]
+    ks = [(c["rb"], c["cidade"]) for c in i]
+    out.append(resultado("V7", "isolamento do solo: cobertura completa (16 células unifamiliares) e sem repetições",
+                         len(ks) == len(set(ks)) and set(ks) == SFH_U, "cobertura", f"{len(ks)} registos, {len(set(ks))} únicos"))
+    dif = []
+    for c in i:
+        g, g13 = G[(c["rb"], c["cidade"])], G13[(c["rb"], c["cidade"])]
+        if (c["nic_dgeg"], c["nh_dgeg_iso13370"], c["nic_2013"], c["nh_2013_iso13370"]) != \
+                (g["nic_13790"], g["nh_52016"], g13["nic_13790_2013"], g13["nh_52016_2013"]):
+            dif.append((c["rb"], c["cidade"], "produção ≠ grelhas"))
+        for k in ("dgeg", "2013"):
+            nic = c[f"nic_{k}"]
+            for var in ("iso13370", "btr08"):
+                nh = c[f"nh_{k}_{var}"]
+                if abs(c[f"dH_{k}_{var}"] - pct(nh, nic)) > _tol_pct(nh, nic, 1, 3):
+                    dif.append((c["rb"], c["cidade"], f"dH_{k}_{var}"))
+            a, b = c[f"nh_{k}_btr08"], c[f"nh_{k}_iso13370"]
+            tol = 0.05 + 100 * (0.001 / nic + abs(a - b) * 0.0005 / nic ** 2) + 1e-9
+            if abs(c[f"dH_{k}_diferenca"] - 100 * (a - b) / nic) > tol:
+                dif.append((c["rb"], c["cidade"], f"dH_{k}_diferenca"))
+    out.append(resultado("V7", "isolamento do solo: produção = grelhas; Δ e diferenças deriváveis das necessidades",
+                         not dif, "integridade", "16/16" if not dif else f"{len(dif)} diferentes: {dif[:2]}"))
     return out
+
+
+# --------------------------------------------------------------- V8
+@protegido("V8", "anatomia do aquecimento")
+def v8(D):
+    hv = list(por_celula([c for c in D["intermed"]["celulas"] if c["hora"] == "verificada"],
+                         "intermediários HV").values())
+    gH = st.median([c["gamma_H_sem_arredondar"] for c in hv])
+    eH = st.median([c["eta_H_sem_arredondar"] for c in hv])
+    gM = st.median([st.mean([m["gamma"] for m in c["mensal_H_activo"]]) for c in hv])
+    eM = st.median([st.mean([m["eta"] for m in c["mensal_H_activo"]]) for c in hv])
+    return [
+        ancora("V8", "γ_H sazonal, mediana entre células (precisão completa)", gH, "0.574", ("0.574", "§3.3")),
+        ancora("V8", "η_H sazonal, mediana entre células", eH, "0.943", ("0.943", "§3.3")),
+        ancora("V8", "γ_H mensal: mediana entre células da média nos meses activos", gM, "1.307", ("1.307", "§3.3")),
+        ancora("V8", "η_H mensal: mediana entre células da média nos meses activos", eM, "0.692", ("0.692", "§3.3")),
+    ]
 
 
 # --------------------------------------------------------------- motor (físicas)
@@ -664,6 +856,7 @@ def correr(D, faltas, motor, a14_path):
         bloco("V5 — A13 ↔ A14, braço mensal (INFORMATIVO)", v5(D, a14_path))
         bloco("V6 — Sensibilidade α = 0,60 (§4.4)", v6(D))
         bloco("V7 — Sensibilidades da Tabela 2 (§2.4, §3.3, §4.4)", v7(D))
+        bloco("V8 — Anatomia do aquecimento (§3.3)", v8(D))
 
     titulo_f = "F1–F3 — Verificações físicas (motor do autor)"
     if motor is None:
@@ -743,6 +936,45 @@ def _p_v7(D):
             c["deslocamento_pp"] *= 2
 
 
+# [04/11] Os contra-exemplos da auditoria externa de 04/11 passam a controlos.
+def _p_v0b(D):
+    for c in D["intermed"]["celulas"]:
+        if c["hora"] == "verificada":
+            c["hora"] = "retirada"
+    D["decomp"]["celulas"] = []
+
+
+def _p_v3c(D):
+    D["gsul"]["meta"]["janelas"]["Nov–Mar"] = []
+
+
+def _p_v6b(D):
+    for c in D["decomp060"]["celulas"]:
+        c["gamma_C_sazonal"] = 1.0
+
+
+def _p_v7b(D):
+    for c in D["sombra"]["celulas"]:
+        c["nvc_sem_protecao"] = 0.0
+        c["gamma_c_sem_protecao"] = 0.0
+
+
+def _p_v7c(D):
+    D["hgr"]["celulas"][0]["dH_hgr_mais22"] = 100.0
+
+
+def _p_v8(D):
+    for c in D["intermed"]["celulas"]:
+        c["gamma_H_sem_arredondar"] *= 1.1
+
+
+def _p_f2cab(D):
+    """Só para ensaio de ponta a ponta (A13_VERIF_PERTURBAR=F2cab): a referência em
+    hora de cabeçalho deixa de coincidir com o motor; o F2 tem de falhar, também
+    na linha de base física do modo de controlos negativos."""
+    _cel(D["fontes"]["celulas"], "RB6", "Coimbra")["necessidades"]["cabecalho"]["nh_52016"] += 1.0
+
+
 # id: (descrição, perturbação, verificação alvo, razão esperada)
 CONTROLOS = {
     "V0": ("fonte HV RB6/Coimbra: N_H + 0,01", _p_v0, v0, "integridade"),
@@ -754,7 +986,14 @@ CONTROLOS = {
     "V4": ("grelha REG: N_ic × 0,98 nas 32 células", _p_v4, v4, "ancora"),
     "V6": ("α=0,60 DGEG: N_H × 1,02 nas 32 células", _p_v6, v6, "ancora"),
     "V7": ("Eq. (97) DGEG: deslocamentos × 2", _p_v7, v7, "ancora"),
+    "V0b": ("todas as anatomias HV retiradas da fonte e do derivado", _p_v0b, v0, "cobertura"),
+    "V3c": ("janela Nov–Mar vazia no artefacto, números intactos", _p_v3c, v3, "janela"),
+    "V6b": ("α=0,60: γ_C = 1 nas 32 anatomias", _p_v6b, v6, "ancora"),
+    "V7b": ("sombreamento: N_vc e γ_C sem protecção a zero, factores intactos", _p_v7b, v7, "integridade"),
+    "V7c": ("H_gr: Δ com +22 % = 100 numa célula, resumo intacto", _p_v7c, v7, "integridade"),
+    "V8": ("γ_H sazonal de precisão completa × 1,1", _p_v8, v8, "ancora"),
 }
+PERTURBACOES_ENSAIO = {"F2cab": ("fonte RB6/Coimbra: N_H em cabeçalho + 1", _p_f2cab)}
 
 
 def _v5_sobre(D, a14):
@@ -771,10 +1010,21 @@ def controlos_negativos(D, faltas, motor, a14_path):
         print("Ficheiros em falta:", ", ".join(faltas), "— controlos negativos não executáveis.")
         return 1
     print("Linha de base primeiro (dados por perturbar):")
-    base = [r for _, _, fn in VERIFICACOES_DADOS for r in fn(D)] + v6(D) + v7(D)
+    base = [r for _, _, fn in VERIFICACOES_DADOS for r in fn(D)] + v6(D) + v7(D) + v8(D)
+    # [04/11, auditoria] com o motor, a linha de base física também tem de passar
+    # antes dos ataques físicos; um motor indicado mas inutilizável interrompe.
+    if motor is not None:
+        M, erro = motor
+        if erro:
+            print(f"⛔ Motor indicado mas inutilizável ({erro}). Parar.")
+            return 1
+        base += f1(M) + f2(M, D) + f3(M, D)
     nf = sum(1 for r in base if r["estado"] == "FALHA")
-    print(f"  {len(base)} resultados, {nf} FALHA")
+    print(f"  {len(base)} resultados{' (com F1–F3)' if motor is not None else ''}, {nf} FALHA")
     if nf:
+        for r in base:
+            if r["estado"] == "FALHA":
+                print(f"   • {r['vid']} {r['nome']} [razão: {r['motivo']}] — {r['detalhe']}")
         print("⛔ A linha de base falha: os controlos negativos não provariam nada. Parar.")
         return 1
     total = nao = 0
@@ -820,22 +1070,19 @@ def controlos_negativos(D, faltas, motor, a14_path):
     print(f"  [{'DETECTADO' if ok else 'NÃO DETECTADO'}] CN-saída: processo sem perturbação → {rc0} "
           f"(esperado 0); com a perturbação do CN-V1 → {rc1} (esperado 1)")
     if motor is not None:
-        M, erro = motor
-        total += 1
-        if erro:
-            print(f"  [NÃO DETECTADO] CN-F: motor inutilizável ({erro})")
-            nao += 1
-        else:
+        M, _ = motor
+        ler_original = M["ler"]
+        so_hv = dict(M, ler=lambda caminho, hora: ler_original(caminho, "verificada"))
+        for cid, desc, rs, razao in (
+                ("F1", "só o ramo mensal recebe α=0,40", f1(M, quebrar=True), "paridade"),
+                ("F2", "os dois pedidos de leitura usam a hora verificada", f2(so_hv, D), "leitor"),
+                ("F3", "janela Nov–Mar no lugar da do produtor", f3(M, D, janela=(11, 12, 1, 2, 3)),
+                 "janela")):
+            certas = [r for r in rs if r["estado"] == "FALHA" and r["motivo"] == razao]
             total += 1
-            for cid, desc, rs, razao in (
-                    ("F1", "só o ramo mensal recebe α=0,40", f1(M, quebrar=True), "paridade"),
-                    ("F3", "janela Nov–Mar no lugar da do produtor", f3(M, D, janela=(11, 12, 1, 2, 3)),
-                     "janela")):
-                certas = [r for r in rs if r["estado"] == "FALHA" and r["motivo"] == razao]
-                nao += 0 if certas else 1
-                print(f"  [{'DETECTADO' if certas else 'NÃO DETECTADO'}] CN-{cid}: {desc} → "
-                      f"pela razão «{razao}»: {len(certas)}")
-            print("  [INFO] CN-F2: o controlo do leitor de cabeçalho corre dentro do F2 (razão «leitor»)")
+            nao += 0 if certas else 1
+            print(f"  [{'DETECTADO' if certas else 'NÃO DETECTADO'}] CN-{cid}: {desc} → "
+                  f"pela razão «{razao}»: {len(certas)}")
     print("\n" + "=" * 76)
     print(f"CONTROLOS NEGATIVOS: {total - nao}/{total} detectados pela razão esperada")
     print("Código de saída:", 1 if nao else 0)
@@ -849,7 +1096,7 @@ def main(argv=None):
                     help="raiz do motor do autor (src/e4 + studies/a13_iso52016_mensal)")
     ap.add_argument("--a14", default=None, help="grelha canónica do A14, para o V5 (informativo)")
     ap.add_argument("--controlo-negativo", action="store_true",
-                    help="um controlo negativo por verificação")
+                    help="um ou mais controlos negativos por bloco de verificação")
     a = ap.parse_args(argv)
     D, faltas = carregar_dados()
     motor = carregar_motor(a.motor) if a.motor else None
@@ -857,12 +1104,13 @@ def main(argv=None):
     if a14 is None and motor is not None and not motor[1]:
         a14 = os.path.join(motor[0]["raiz"], "studies", "a14_iso52016_horario", "resultados",
                            "grelha_a14_canonica.json")
+    pert = os.environ.get("A13_VERIF_PERTURBAR")
+    if pert and not faltas:                 # só para ensaios de ponta a ponta
+        desc, fn = (CONTROLOS[pert][:2] if pert in CONTROLOS else PERTURBACOES_ENSAIO[pert])
+        print(f"⚠ perturbação em memória activa: {pert} ({desc})")
+        fn(D)
     if a.controlo_negativo:
         return controlos_negativos(D, faltas, motor, a14)
-    pert = os.environ.get("A13_VERIF_PERTURBAR")
-    if pert:                                # só para o CN-saída
-        print(f"⚠ perturbação em memória activa: CN-{pert} ({CONTROLOS[pert][0]})")
-        CONTROLOS[pert][1](D)
     return correr(D, faltas, motor, a14)
 
 

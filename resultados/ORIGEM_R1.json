@@ -55,14 +55,14 @@
     "resultados/isolamento_solo_artigo13_REVISAO.json": "isolamento do termo de solo, hora verificada; produtor no motor (src/e4/isolamento_solo_artigo13_REVISAO.py), a pedido",
     "resultados/sensibilidade_alfa060_A13.json": "sensibilidade α = 0,60, hora verificada; produtor: scripts/sensibilidade_alfa060_A13.py",
     "resultados/decomposicao_artigo13_alfa060.json": "anatomias sob α = 0,60, hora verificada; produtor: scripts/sensibilidade_alfa060_A13.py",
-    "resultados/sensibilidade_gsul_janela_HV.json": "janela do G_sul, 128 observações, hora verificada; produtor: scripts/sensibilidade_gsul_janela_HV.py (o meta regista o SHA-256 do script da corrida de 04/11/2026, antes da adaptação dos caminhos)",
+    "resultados/sensibilidade_gsul_janela_HV.json": "janela do G_sul, 128 observações, hora verificada; produtor: scripts/sensibilidade_gsul_janela_HV.py (o meta regista o SHA-256 do script da corrida de 04/11/2026, antes da adaptação dos caminhos; a chave da fonte de referência passou a caminho relativo, com o mesmo SHA-256, a 04/11/2026)",
     "resultados/estatisticas_R1.txt": "saída de figures/estatisticas.py --revisao",
     "resultados/NUMEROS_revisao_A13.md": "saída de figures/numeros_revisao.py"
   },
   "sha256": {
     "LICENSE": "6fae7950467341ebf3246ba99726acac7562d1197707d0feaa5242827052fb68",
-    "LICENSE-DATA": "0c20307b7b8de1dfb397293fb7da364636415c6949e684a272830b7e3fe0409c",
-    "README.md": "94bdcf5089df2024f245070304b30f8744e45d67c6a46b3d801cad907f039d6c",
+    "LICENSE-DATA": "b3795b449442e32df2eb06a4a027d8b4bf0f0a0140c450616f55b2537aa004c5",
+    "README.md": "9b89a1380d0d7c39ad7d044245ac21301cfa65e2783a9a7490c3be13503d4ae9",
     "figures/dados_a13.py": "928bfed029d5c84c368c6641021442a0debdd8e88947cdba93868426742f879c",
     "figures/estatisticas.py": "d109a5756f7d1ae40be5ca208fbfbf1a14f28873283b2c06364eb0ffbe1c8d09",
     "figures/gerar_figuras.py": "f4870fb8ff95a3bff6bad5a5d4aec0cfbafcfb84a2f53c6716baedeae942ef85",
@@ -126,18 +126,18 @@
     "resultados/isolamento_solo_artigo13_REVISAO.json": "17a8b1d157b34bd54b051b08badc96f50540952ec8fd22df7883467994961656",
     "resultados/sensibilidade_alfa060_A13.json": "a284e80f7459eff44c43c1358781bd903afe5cf2774156c70a27374fc2749ebd",
     "resultados/sensibilidade_eq97_REVISAO.json": "04bb7accc9496016ee93ee7622839d6579d24fbd6e30b099eba7d95eaab6a569",
-    "resultados/sensibilidade_gsul_janela_HV.json": "a83ca1d47b164f78d2af82ead9716addbe3d593d02d29186824ee364365931d0",
+    "resultados/sensibilidade_gsul_janela_HV.json": "d225e435f0cc488d8ebaefe95efaccd9c29f71f9ae07390003497f2cd0dafd0e",
     "resultados/sensibilidade_hgr22_REVISAO.json": "3926e81e616ff1324d64368c04b64b2f475c1766ef84ba52f0acd62aacf969d9",
     "resultados/sensibilidade_sombreamento_REVISAO.json": "98d2d6d1ba53f6990030f98b6f0e976610df6772eb5f94cd893bae320d808297",
     "scripts/numerar_figuras_r1.py": "66b713c9c8e7dfac443d34f041aed2d3b23a37fc03119228130d8b6396d28cda",
     "scripts/preparar_figuras_r1.py": "cc7eca45f50a3cc5692677416acb26f8ad44468bf9318d343abbfc8a335354cf",
-    "scripts/revisao_a13_producao.py": "3029ec9bdd7fb4de73fdce32f51a54c8a2d58cb13a1c863f1627b18a02d4b312",
+    "scripts/revisao_a13_producao.py": "52c6f49b1bff98b923471a362223bba592a2f64608fd0e0e9d1f9b791ef3e6d8",
     "scripts/sensibilidade_alfa060_A13.py": "c23eeb86ceec0ad247016f7b8bbeb9a30e90a8a096be9b71aaf6d2d12e29febc",
     "scripts/sensibilidade_gsul_janela_HV.py": "aac7ed833809c6e7aaec631342a91c170702ed161f7d52e73fc13a6daac8c585",
     "scripts/sensibilidades_hv/LEIA-ME.md": "9118afa78f042cf715922c2863c8d2ac60ceeec2c6cb0b8aac6d694f762ac003",
-    "scripts/sensibilidades_hv/hv_patch.py": "d0452adf79fae5af02a4d980c47dfbf8575bb57fffcce51e21dae1b08fdeb970",
+    "scripts/sensibilidades_hv/hv_patch.py": "37d6e496969cd1ea4999a32d8a525fd0c91899d8e9fe232f198f4b900114cb22",
     "scripts/sensibilidades_hv/run_hv.py": "593039ecd3b529b54161b017b2bce8d3d256c629e2a287d340a58b36a5d6a631",
     "scripts/verificar_artigo13.py": "68903c8a9b40e347bf08a34ce57bc24f7cd4dcd005e2ed1f60479d21e3841ae6",
-    "scripts/verificar_revisao_a13.py": "c7638f4e015766bee433d7e0310182326c95643472f6dab83fb1def4f8c38125"
+    "scripts/verificar_revisao_a13.py": "466458ccdfbb0bc3c7e64dc7106cdecccdb612fac1920292422764afcbe79413"
   }
 }

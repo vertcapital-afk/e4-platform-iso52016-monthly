@@ -30,7 +30,7 @@ R1 (04/11/2026), diferenças face à versão publicada com a submissão:
     · a regressão é contra resultados/fontes_HV/RESULTADO_A13_COMPLETO.json
       (a grelha da versão JBE, que a versão anterior usava, não está neste
       depósito); se falhar, nada se grava;
-    · escreve só em --saida, nunca no motor nem em resultados/ do depósito;
+    · escreve só em --saida, uma pasta fora do motor e fora do depósito;
     · os caminhos são relativos ao depósito e ao motor indicado.
 
 Uso (Windows: «py»):
@@ -178,9 +178,9 @@ def quadro(cs, sfx, peso):
 
 
 def pasta_saida_valida(saida, M):
-    """--saida não pode estar dentro do motor nem em resultados/ do depósito."""
+    """--saida não pode estar dentro do motor nem dentro do depósito."""
     s = os.path.normcase(os.path.abspath(saida))
-    for proibida in (M["raiz"], os.path.join(DEPOSITO, "resultados")):
+    for proibida in (M["raiz"], DEPOSITO):
         p = os.path.normcase(os.path.abspath(proibida))
         if s == p or s.startswith(p + os.sep):
             return f"--saida {saida} está dentro de {proibida}"
@@ -196,7 +196,7 @@ def argumentos(argv, descricao):
                     help="base de tempo da leitura do EPW (R1: verificada)")
     a = ap.parse_args(argv)
     if not a.celula and not a.saida:
-        print("⛔ Sem --celula, é obrigatório indicar --saida (pasta nova, fora do motor).")
+        print("⛔ Sem --celula, é obrigatório indicar --saida (pasta nova, fora do motor e do depósito).")
         raise SystemExit(2)
     return a
 

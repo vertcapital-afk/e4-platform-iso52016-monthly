@@ -18,7 +18,7 @@ do motor do autor (pacote privado, disponível a pedido), com esta disposição:
     PASTA/RESULTADO_A13_COMPLETO.json         (de resultados/fontes_HV/)
 
 Uma CÓPIA, nunca o repositório do motor: os produtores das sensibilidades gravam
-os resultados ao lado de si. O módulo recusa uma pasta com .git.
+os resultados ao lado de si. O módulo recusa uma pasta com .git (pasta ou ficheiro).
 Ver LEIA-ME.md. Lógica igual à usada em 03/11/2026; no depósito acrescentaram-se
 este cabeçalho, a recusa acima e a leitura explícita em UTF-8.
 """
@@ -27,7 +27,7 @@ W=os.path.dirname(os.path.abspath(__file__))
 if not os.path.isfile(os.path.join(W,"src","e4","__init__.py")) or not os.path.isfile(os.path.join(W,"studies","a13_iso52016_mensal","run_grelha_artigo13.py")):
     print(f"hv_patch.py: {W} não é uma cópia de trabalho do motor (falta src/e4 ou studies/a13_iso52016_mensal). Ver LEIA-ME.md.")
     raise SystemExit(2)
-if os.path.isdir(os.path.join(W,".git")):
+if os.path.exists(os.path.join(W,".git")):   # pasta ou ficheiro (worktree)
     print(f"hv_patch.py: {W} tem .git: parece o repositório do motor. Corra numa CÓPIA (os produtores gravam ao lado de si).")
     raise SystemExit(2)
 sys.dont_write_bytecode=True

@@ -47,7 +47,7 @@
     "chamadas_sazonais_incluindo_CN": 160,
     "tolerancia_regressao": 1e-09,
     "fontes_sha256": {
-      "C:\\Users\\sftadeu\\.codex\\outputs\\e4-auditorias\\2026-10-30-tema1\\RESULTADO_A13_COMPLETO.json": "69c4e74633af59ea6ae06a3402847cfb061c56276acc187c19d2329f6dafb82c",
+      "resultados/fontes_HV/RESULTADO_A13_COMPLETO.json": "69c4e74633af59ea6ae06a3402847cfb061c56276acc187c19d2329f6dafb82c",
       "C:\\e4-platform\\studies\\a13_iso52016_mensal\\run_grelha_artigo13.py": "6ff81d767f32db3c5ecda79914898c3886bcaebeb74af454d6d321f0589a7b5a",
       "C:\\e4-platform\\studies\\a13_iso52016_mensal\\revisao_a13_producao.py": "5320fd687d36f3cf63416addcee3cda595661fe6ddcb8ece5a359bc2b4428d0c",
       "C:\\e4-platform\\studies\\a13_iso52016_mensal\\revisao\\sensibilidades_hv\\hv_patch.py": "bb0c5fc459cb46928e15c7a0af72d75fd51ff260c1676f037cb1a15c8c0cfe9c",
