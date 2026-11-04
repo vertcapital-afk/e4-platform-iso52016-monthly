@@ -1,3 +1,9 @@
+# ---- ORDEM DE EXECUCAO OBRIGATORIA ----
+# 1. gerar_figuras.py            -> Fig1..Fig7
+# 2. gerar_figuras_8_9.py        -> Fig8, Fig9
+# 3. gerar_figuras_fix_e_10.py   -> REESCREVE Fig1..Fig3, escreve Fig10
+# Correr so o (1) deixa Fig1-Fig3 superadas em silencio.
+#
 # --- fonte de dados unica: dados_a13.py -----------------------------------
 # [31/07/2026] O literal `T` com a base REG-2013, transcrito a mao, foi
 # SUBSTITUIDO por leitura do JSON. Continha um erro de transposicao em
@@ -15,6 +21,16 @@ def _decomp(base_2013=False):
     n = "decomposicao_artigo13" + ("_2013" if base_2013 else "") + _sfx().upper() + ".json"
     import json as _j
     return _j.load(open(_os.path.join(_RES_F, n), encoding="utf-8"))
+
+NOMES_FIGS = {
+    1: "Fig1_cooling_threshold",
+    2: "Fig2_method_effect_conditional",
+    3: "Fig3_heatmap_dH",
+    4: "Fig4_confound_cascade",
+    5: "Fig5_parity_scatter",
+    6: "Fig6_setpoint_scenario",
+    7: "Fig7_base_effect_by_method",
+}
 
 """Figuras do Artigo 13 — geradas a partir de grelha_artigo13.json (DGEG2025-A)
 e da tabela REG-2013 do Handoff_Artigo13_08.md §2.2. Nenhum recálculo físico."""
@@ -87,14 +103,15 @@ ax.set_xlabel("Seasonal cooling need $N_{vc}$  [kWh/m²·a, log scale]")
 ax.set_ylabel("Cooling divergence  $\\Delta_C$  [%]")
 ax.set_title("The seasonal magnitude alone does not separate the regimes")
 _n4 = sum(1 for c in D if c["nvc_13790"] < 4.0)
-ax.text(0.98, 0.06, "only %d of 32 cells fall below 4 kWh/m²·a;\nthe separating criterion is $\\gamma_C$ (Fig. 8)" % _n4,
-        transform=ax.transAxes, fontsize=7.2, color=GREY, ha="right", style="italic")
+# [R1 03/11] A2: nota passada para a legenda da figura.
 ax.legend(handles=[
     plt.Line2D([], [], marker="o", ls="", color=C25, label="DGEG2025-A base"),
     plt.Line2D([], [], marker="s", ls="", mfc="none", mec=C13, label="REG-2013 base")],
     loc="upper right", ncol=1)
 for s_ in ("top", "right"): ax.spines[s_].set_visible(False)
-fig.savefig(f"{OUT}/Fig1_cooling_threshold.png"); plt.close(fig)
+fig.savefig(f"{OUT}/Fig1_cooling_threshold.png")
+fig.savefig(f"{OUT}/Fig1_cooling_threshold.pdf")
+fig.savefig(f"{OUT}/Fig1.pdf"); plt.close(fig)
 
 # ---------------------------------------------------------------- FIG 2
 # Distribuição do efeito de método: base, arquétipo, cidade
@@ -126,7 +143,9 @@ for a in axes[1:]: a.set_ylim(axes[0].get_ylim())
 tag(axes[0], "a"); tag(axes[1], "b"); tag(axes[2], "c")
 fig.suptitle("The method effect is conditional, not constant", y=1.02,
              fontsize=10, fontweight="bold")
-fig.savefig(f"{OUT}/Fig2_method_effect_conditional.png"); plt.close(fig)
+fig.savefig(f"{OUT}/Fig2_method_effect_conditional.png")
+fig.savefig(f"{OUT}/Fig2_method_effect_conditional.pdf")
+fig.savefig(f"{OUT}/Fig2.pdf"); plt.close(fig)
 
 # ---------------------------------------------------------------- FIG 3
 # Heatmaps ΔH nas duas bases
@@ -153,32 +172,29 @@ cb = fig.colorbar(im, ax=axes, fraction=0.028, pad=0.02)
 cb.set_label("$\\Delta_H$  [%]", fontsize=8.5); cb.ax.tick_params(labelsize=7.5)
 fig.suptitle("Heating divergence across the 32 building×city combinations",
              y=1.02, fontsize=10, fontweight="bold")
-fig.savefig(f"{OUT}/Fig3_heatmap_dH.png"); plt.close(fig)
+fig.savefig(f"{OUT}/Fig3_heatmap_dH.png")
+fig.savefig(f"{OUT}/Fig3_heatmap_dH.pdf")
+fig.savefig(f"{OUT}/Fig3.pdf"); plt.close(fig)
 
 # ---------------------------------------------------------------- FIG 4
-# Cascata dos confundimentos (RB6/Coimbra)
-fig, ax = plt.subplots(figsize=(6.0, 3.3))
-labels = ["No envelope\nparity\n(non-production)", "Unharmonised\naltitude\n(158 vs 255 m)",
-          "Naive cross-base\ncomparison", "Method effect\nREG-2013", "Method effect\nDGEG2025-A"]
-vals = [70.0, 21.0, 11.2, 10.1, 17.4]
-cols = [GREY, GREY, GREY, C13, C25]
-bars = ax.bar(range(5), vals, color=cols, width=0.62)
-for b, a in zip(bars, [0.45, 0.45, 0.45, 0.9, 0.9]):
-    b.set_alpha(a)
-for i, (b, v) in enumerate(zip(bars, vals)):
-    ax.text(b.get_x() + b.get_width() / 2, v + 1.6, f"+{v:.1f}%", ha="center",
-            fontsize=8, fontweight="bold" if i > 2 else "normal",
-            color="#111" if i > 2 else GREY)
-ax.axhspan(10.1, 17.4, color=C25, alpha=0.07, zorder=0)
-ax.set_xticks(range(5)); ax.set_xticklabels(labels, fontsize=7.2)
-ax.set_ylabel("Reported heating divergence  [%]")
-ax.set_title("What comparison protocol does to the reported divergence\n(RB6 / Coimbra)")
-ax.set_ylim(0, 82)
-ax.text(2.0, 60, "artefacts of\ncomparison protocol", fontsize=7.8, color=GREY,
-        ha="center", style="italic")
-ax.text(3.5, 34, "defensible\nrange", fontsize=7.8, color=C25, ha="center", style="italic")
-for s in ("top", "right"): ax.spines[s].set_visible(False)
-fig.savefig(f"{OUT}/Fig4_confound_cascade.png"); plt.close(fig)
+# [R1 03/11, decisor] Tres contrastes nominais recuperaveis (proposta Sol, aceite):
+# sem a barra dos +70 % (irreprodutivel) nem a dos +21 % (altitude, historica).
+c=next(c for c in D if c['rb']=='RB6' and c['cidade']=='Coimbra')
+vals=[100*(c['nh_52016']/c['nic13']-1),c['dH13'],c['dH25']]
+fig,ax=plt.subplots(figsize=(6.0,3.3))
+labels=['Naive cross-base','Method effect\nREG-2013','Method effect\nDGEG2025-A']
+bars=ax.bar(range(3),vals,color=[GREY,C13,C25],width=.62)
+for b,v in zip(bars,vals):
+    ax.text(b.get_x()+b.get_width()/2,v+.3,f'{v:+.1f}%',ha='center')
+ax.set_xticks(range(3));ax.set_xticklabels(labels)
+ax.set_ylabel('Heating divergence [%]')
+ax.set_title('RB6 / Coimbra')
+ax.set_ylim(0,max(vals)*1.25)
+for s_ in("top","right"): ax.spines[s_].set_visible(False)
+for ext in ['png','pdf']:
+    fig.savefig(f'{OUT}/Fig4_confound_cascade.{ext}')
+    fig.savefig(f'{OUT}/Fig4_graphical_abstract.{ext}')
+fig.savefig(f'{OUT}/Fig4.pdf');plt.close(fig)
 
 # ---------------------------------------------------------------- FIG 5
 # Paridade: sazonal vs mensal, aquecimento, duas bases
@@ -203,7 +219,9 @@ h += [plt.Line2D([], [], marker="o", ls="", color=GREY, label="SFH (filled)"),
 axes[1].legend(handles=h, loc="lower right", fontsize=6.8, ncol=2)
 fig.suptitle("Monthly versus seasonal heating needs, envelope parity enforced",
              y=1.0, fontsize=10, fontweight="bold")
-fig.savefig(f"{OUT}/Fig5_parity_scatter.png"); plt.close(fig)
+fig.savefig(f"{OUT}/Fig5_parity_scatter.png")
+fig.savefig(f"{OUT}/Fig5_parity_scatter.pdf")
+fig.savefig(f"{OUT}/Fig5.pdf"); plt.close(fig)
 
 # ---------------------------------------------------------------- FIG 6
 # Cenário 20 °C
@@ -220,7 +238,9 @@ ax.set_ylabel("Increase in $N_H$  [%]")
 ax.set_title("Prospective setpoint scenario: 18 °C → 20 °C (monthly axis)")
 ax.legend(ncol=4, loc="upper center", bbox_to_anchor=(0.5, -0.16))
 for s in ("top", "right"): ax.spines[s].set_visible(False)
-fig.savefig(f"{OUT}/Fig6_setpoint_scenario.png"); plt.close(fig)
+fig.savefig(f"{OUT}/Fig6_setpoint_scenario.png")
+fig.savefig(f"{OUT}/Fig6_setpoint_scenario.pdf")
+fig.savefig(f"{OUT}/Fig6.pdf"); plt.close(fig)
 
 # ---------------------------------------------------------------- FIG 7
 # Efeito de base por método (slopegraph agregado)
@@ -243,6 +263,8 @@ _mm = np.median([(c["nh_52016"]/c["nh13"]-1)*100 for c in D])
 ax.set_title("Response of each method to a change of\nclimate base (median %+.1f %% vs %+.1f %%)" % (_ms, _mm),
              fontsize=9)
 for s in ("top", "right"): ax.spines[s].set_visible(False)
-fig.savefig(f"{OUT}/Fig7_base_effect_by_method.png"); plt.close(fig)
+fig.savefig(f"{OUT}/Fig7_base_effect_by_method.png")
+fig.savefig(f"{OUT}/Fig7_base_effect_by_method.pdf")
+fig.savefig(f"{OUT}/Fig7.pdf"); plt.close(fig)
 
 print("OK ->", sorted(os.listdir(OUT)))

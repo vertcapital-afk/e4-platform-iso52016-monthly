@@ -1,105 +1,123 @@
-# NÚMEROS DA REVISÃO — Artigo 13
+# NÚMEROS DA REVISÃO R1 — Artigo 13
 
-**31/07/2026 · [P-alfa-A13-paridade]**
+Resumo de estatísticas calculadas dos dados depositados do R1 (Energy & Buildings, ENB-D-26-06604; manuscrito em revisão, não aceite nem publicado). **Não é uma verificação exaustiva do manuscrito**: a verificação, com âncoras e controlos negativos, é `scripts/verificar_revisao_a13.py`.
 
-Gerado por `studies/a13_iso52016_mensal/figures/numeros_revisao.py`.
+Gerado por `figures/numeros_revisao.py` a partir de `resultados/grelha_artigo13_REVISAO.json` (DGEG2025-A, hora solar verificada) e `resultados/grelha_artigo13_2013_REVISAO.json` (REG-2013, clima tabelado). **Não editar à mão**: regenerar com `py figures\numeros_revisao.py`.
 
-Vive em `studies/a13_iso52016_mensal/resultados/`. **Nao editar a mao** —
-
-regenerar com `py studies\a13_iso52016_mensal\figures\numeros_revisao.py`.
-
-Submetido = estado JBE. Revisto = α_parede 0,40 + desvão 0 **nos dois ramos** + h_ce 20,0.
+Configuração R1: α_parede 0,40 e desvão 0 **nos dois ramos**, h_ce 20,0 no ramo mensal. Δ = método mensal (ISO 52016-1) face ao sazonal (ISO 13790), em percentagem do sazonal. Necessidades em kWh/m²·a.
 
 
-## 1. Efeito de método — global (n=32)
+## 1. Efeito de método — global (n = 32 por base)
 
-| grandeza | submetido | revisto |
-|---|---|---|
-| ΔH DGEG2025-A | med +13.0% · IQR [+4.7; +22.4] · neg 3/32 | med +16.0% · IQR [+8.8; +26.5] · neg 1/32 |
-| ΔH REG-2013 | med +7.2% · IQR [-0.9; +21.4] · neg 11/32 | med +11.0% · IQR [+1.1; +26.5] · neg 6/32 |
-| ΔC DGEG2025-A | med +3.4% · IQR [-17.3; +82.9] · neg 14/32 | med +1.9% · IQR [-15.2; +46.0] · neg 16/32 |
-| ΔC REG-2013 | med +9.2% · IQR [-11.4; +54.8] · neg 12/32 | med +6.5% · IQR [-9.8; +33.0] · neg 12/32 |
+| grandeza | mediana · IQR · [mín; máx] · negativas |
+|---|---|
+| Δ_H DGEG2025-A | med +15.6% · IQR [+9.6; +25.9] · [-5.6; +75.5] · neg 1/32 |
+| Δ_H REG-2013 | med +11.0% · IQR [+1.1; +26.5] · [-12.1; +54.1] · neg 6/32 |
+| Δ_C DGEG2025-A | med +2.7% · IQR [-14.3; +45.6] · [-29.4; +181.5] · neg 16/32 |
+| Δ_C REG-2013 | med +6.5% · IQR [-9.8; +33.0] · [-23.4; +164.4] · neg 12/32 |
 
-## 2. Necessidades medianas (kWh/m²·a) — o denominador visível
+## 2. Necessidades medianas — o denominador visível
 
-| grandeza | submetido | revisto |
-|---|---|---|
-| N_ic 13790 (DGEG) | 76.31 | 71.21 |
-| N_H 52016 (DGEG) | 88.70 | 85.22 |
-| N_vc 13790 (DGEG) | 5.92 | 10.07 |
-| N_C 52016 (DGEG) | 6.36 | 14.70 |
-| N_ic 13790 (2013) | 93.06 | 83.97 |
-| N_H 52016 (2013) | 90.19 | 85.12 |
-| N_vc 13790 (2013) | 5.72 | 11.06 |
-| N_C 52016 (2013) | 6.67 | 14.54 |
+| grandeza | mediana |
+|---|---|
+| N_ic sazonal (DGEG2025-A) | 69.95 |
+| N_H mensal (DGEG2025-A) | 83.48 |
+| N_vc sazonal (DGEG2025-A) | 10.68 |
+| N_C mensal (DGEG2025-A) | 14.95 |
+| N_ic sazonal (REG-2013) | 83.97 |
+| N_H mensal (REG-2013) | 85.12 |
+| N_vc sazonal (REG-2013) | 11.06 |
+| N_C mensal (REG-2013) | 14.54 |
 
-## 3. Tabela 6 — SFH vs MFH (medianas)
+## 3. Unifamiliares (RB1–RB4) e multifamiliares (RB5–RB8) — medianas
 
-| grupo | ΔH DGEG | ΔH 2013 | ΔC DGEG | ΔC 2013 |
+| grupo | Δ_H DGEG2025-A | Δ_H REG-2013 | Δ_C DGEG2025-A | Δ_C REG-2013 |
 |---|---|---|---|---|
-| SFH submetido | +5.0% | +0.8% | +9.0% | +17.6% |
-| MFH submetido | +17.9% | +9.8% | -1.7% | +6.5% |
-| SFH revisto | +11.2% | +5.1% | +10.4% | +19.4% |
-| MFH revisto | +21.5% | +12.4% | -4.0% | +4.0% |
+| unifamiliares | +11.9% | +5.1% | +10.3% | +19.4% |
+| multifamiliares | +20.1% | +12.4% | -3.7% | +4.0% |
 
-## 4. Tabela 7 — ponderado pelo stock
+## 4. Agregado ponderado pelo parque
 
-| base / grandeza | 13790 | 52016 | efeito | (submetido) |
-|---|---|---|---|---|
-| DGEG2025-A aquec | 103.41 | 114.42 | **+10.6%** | (+6.9%) |
-| DGEG2025-A arref | 16.84 | 16.60 | **-1.5%** | (-3.4%) |
-| REG-2013 aquec | 106.67 | 109.65 | **+2.8%** | (-0.5%) |
-| REG-2013 arref | 19.10 | 19.01 | **-0.5%** | (-2.8%) |
+Pesos do parque (Census) de `figures/estatisticas.py`; cidades equiponderadas em cada arquétipo. O efeito é o rácio das necessidades ponderadas, não a média dos rácios.
+
+| base / uso | sazonal | mensal | efeito |
+|---|---|---|---|
+| DGEG2025-A aquecimento | 102.53 | 113.23 | **+10.4%** |
+| DGEG2025-A arrefecimento | 17.40 | 17.23 | **-1.0%** |
+| REG-2013 aquecimento | 106.67 | 109.65 | **+2.8%** |
+| REG-2013 arrefecimento | 19.10 | 19.01 | **-0.5%** |
+
+Média ponderada dos rácios (aquecimento), para comparação: DGEG2025-A +17.54%, REG-2013 +9.82%.
+
 
 ## 5. Por cidade — medianas
 
-| cidade | ΔH DGEG sub→rev | ΔH 2013 sub→rev | ΔC DGEG sub→rev | ΔC 2013 sub→rev |
+| cidade | Δ_H DGEG2025-A | Δ_H REG-2013 | Δ_C DGEG2025-A | Δ_C REG-2013 |
 |---|---|---|---|---|
-| Coimbra | +16.2 → **+22.3** | +13.6 → **+18.5** | +3.4 → **+1.6** | +20.5 → **+15.9** |
-| Bragança | +10.4 → **+12.8** | +1.6 → **+4.3** | +105.2 → **+80.1** | +59.7 → **+51.4** |
-| Évora | +4.7 → **+8.7** | +2.7 → **+7.0** | -27.2 → **-23.7** | -19.2 → **-17.3** |
-| Lisboa | +28.7 → **+36.9** | +18.0 → **+24.7** | +3.6 → **+2.4** | +6.8 → **+4.5** |
+| Coimbra | +22.3% | +18.5% | +1.9% | +15.9% |
+| Bragança | +12.8% | +4.3% | +78.0% | +51.4% |
+| Évora | +8.7% | +7.0% | -23.2% | -17.3% |
+| Lisboa | +39.1% | +24.7% | +3.2% | +4.5% |
 
-## 6. Tabela S1 REVISTA — base DGEG2025-A
+## 6. Efeito de base (REG-2013 → DGEG2025-A), mesmo método
 
-| RB | cidade | N_ic 13790 | N_H 52016 | N_vc 13790 | N_C 52016 | ΔH | ΔC |
+| grandeza | mediana | [mín; máx] |
+|---|---|---|
+| aquecimento, sazonal | -0.8% | [-34.6; +28.5] |
+| aquecimento, mensal | +5.4% | [-27.2; +23.0] |
+| arrefecimento, sazonal | +0.0% | [-25.2; +33.2] |
+| arrefecimento, mensal | -9.9% | [-25.4; +56.3] |
+
+## 7. RB6/Coimbra — os quatro cantos e o cruzamento ingénuo
+
+| base | N_ic sazonal | N_H mensal | Δ_H |
+|---|---|---|---|
+| REG-2013 | 125.46 | 138.10 | +10.1% |
+| DGEG2025-A | 118.17 | 137.65 | +16.5% |
+
+Cruzamento ingénuo N_H(DGEG2025-A) / N_ic(REG-2013): +9.7% (calculado das grelhas a 3 casas; o valor de precisão completa está em `resultados/cruzamento_ingenuo_rb6_coimbra_REVISAO.json`).
+
+
+## 8. Por célula — base DGEG2025-A
+
+| RB | cidade | N_ic | N_H | N_vc | N_C | Δ_H | Δ_C |
 |---|---|---|---|---|---|---|---|
-| RB1 | Coimbra | 154.42 | 173.47 | 13.230 | 14.875 | +12.3% | +12.4% |
-| RB2 | Coimbra | 117.25 | 124.54 | 7.922 | 10.915 | +6.2% | +37.8% |
-| RB3 | Coimbra | 47.81 | 59.80 | 6.605 | 6.993 | +25.1% | +5.9% |
-| RB4 | Coimbra | 28.19 | 36.88 | 5.960 | 5.719 | +30.8% | -4.0% |
-| RB5 | Coimbra | 141.84 | 169.65 | 23.700 | 23.067 | +19.6% | -2.7% |
-| RB6 | Coimbra | 118.80 | 139.50 | 18.771 | 19.996 | +17.4% | +6.5% |
-| RB7 | Coimbra | 45.96 | 60.98 | 9.883 | 9.355 | +32.7% | -5.3% |
-| RB8 | Coimbra | 23.09 | 33.29 | 7.662 | 6.948 | +44.2% | -9.3% |
-| RB1 | Bragança | 310.78 | 334.53 | 8.803 | 15.477 | +7.6% | +75.8% |
-| RB2 | Bragança | 240.65 | 245.47 | 3.972 | 11.293 | +2.0% | +184.3% |
-| RB3 | Bragança | 113.13 | 126.72 | 3.548 | 7.311 | +12.0% | +106.1% |
-| RB4 | Bragança | 72.27 | 82.76 | 3.328 | 5.898 | +14.5% | +77.2% |
-| RB5 | Bragança | 286.91 | 326.11 | 15.936 | 23.469 | +13.7% | +47.3% |
-| RB6 | Bragança | 244.34 | 271.06 | 10.267 | 20.584 | +10.9% | +100.5% |
-| RB7 | Bragança | 107.63 | 127.09 | 5.363 | 9.817 | +18.1% | +83.1% |
-| RB8 | Bragança | 60.63 | 74.76 | 4.286 | 7.196 | +23.3% | +67.9% |
-| RB1 | Évora | 142.71 | 143.73 | 42.998 | 31.813 | +0.7% | -26.0% |
-| RB2 | Évora | 108.33 | 102.05 | 37.573 | 26.392 | -5.8% | -29.8% |
-| RB3 | Évora | 43.42 | 47.12 | 25.907 | 18.470 | +8.5% | -28.7% |
-| RB4 | Évora | 25.59 | 28.25 | 20.613 | 15.533 | +10.4% | -24.6% |
-| RB5 | Évora | 130.18 | 141.75 | 59.408 | 46.854 | +8.9% | -21.1% |
-| RB6 | Évora | 108.97 | 115.88 | 56.897 | 43.958 | +6.3% | -22.7% |
-| RB7 | Évora | 41.91 | 49.30 | 29.866 | 23.508 | +17.6% | -21.3% |
-| RB8 | Évora | 21.07 | 26.12 | 21.274 | 17.888 | +24.0% | -15.9% |
-| RB1 | Lisboa | 78.43 | 88.69 | 12.425 | 14.522 | +13.1% | +16.9% |
-| RB2 | Lisboa | 55.69 | 60.60 | 7.407 | 10.543 | +8.8% | +42.3% |
-| RB3 | Lisboa | 16.71 | 24.51 | 6.274 | 6.805 | +46.7% | +8.5% |
-| RB4 | Lisboa | 8.65 | 13.22 | 5.741 | 5.614 | +52.8% | -2.2% |
-| RB5 | Lisboa | 70.14 | 87.69 | 21.296 | 20.841 | +25.0% | -2.1% |
-| RB6 | Lisboa | 54.98 | 69.82 | 16.757 | 17.905 | +27.0% | +6.9% |
-| RB7 | Lisboa | 16.52 | 26.70 | 8.792 | 8.142 | +61.6% | -7.4% |
-| RB8 | Lisboa | 6.93 | 12.46 | 6.901 | 5.996 | +79.7% | -13.1% |
+| RB1 | Coimbra | 154.41 | 173.77 | 13.075 | 14.707 | +12.5% | +12.5% |
+| RB2 | Coimbra | 117.19 | 124.76 | 7.822 | 10.804 | +6.5% | +38.1% |
+| RB3 | Coimbra | 47.69 | 60.01 | 6.507 | 6.901 | +25.8% | +6.1% |
+| RB4 | Coimbra | 28.09 | 37.05 | 5.875 | 5.640 | +31.9% | -4.0% |
+| RB5 | Coimbra | 141.09 | 167.53 | 24.502 | 23.970 | +18.7% | -2.2% |
+| RB6 | Coimbra | 118.17 | 137.65 | 19.425 | 20.675 | +16.5% | +6.4% |
+| RB7 | Coimbra | 45.60 | 59.73 | 10.362 | 9.817 | +31.0% | -5.3% |
+| RB8 | Coimbra | 22.89 | 32.40 | 8.051 | 7.342 | +41.5% | -8.8% |
+| RB1 | Bragança | 309.53 | 333.63 | 9.042 | 15.885 | +7.8% | +75.7% |
+| RB2 | Bragança | 239.64 | 244.69 | 4.122 | 11.603 | +2.1% | +181.5% |
+| RB3 | Bragança | 112.22 | 126.16 | 3.655 | 7.482 | +12.4% | +104.7% |
+| RB4 | Bragança | 71.57 | 82.35 | 3.410 | 6.018 | +15.1% | +76.5% |
+| RB5 | Bragança | 285.13 | 322.69 | 16.857 | 24.784 | +13.2% | +47.0% |
+| RB6 | Bragança | 242.87 | 268.04 | 10.997 | 21.654 | +10.4% | +96.9% |
+| RB7 | Bragança | 106.61 | 124.99 | 5.782 | 10.385 | +17.2% | +79.6% |
+| RB8 | Bragança | 59.92 | 73.18 | 4.604 | 7.607 | +22.1% | +65.2% |
+| RB1 | Évora | 141.68 | 143.05 | 43.670 | 32.478 | +1.0% | -25.6% |
+| RB2 | Évora | 107.47 | 101.47 | 38.109 | 26.894 | -5.6% | -29.4% |
+| RB3 | Évora | 42.75 | 46.74 | 26.265 | 18.808 | +9.3% | -28.4% |
+| RB4 | Évora | 25.13 | 27.98 | 20.872 | 15.794 | +11.3% | -24.3% |
+| RB5 | Évora | 128.78 | 139.15 | 61.290 | 48.878 | +8.1% | -20.3% |
+| RB6 | Évora | 107.73 | 113.57 | 58.450 | 45.592 | +5.4% | -22.0% |
+| RB7 | Évora | 41.16 | 47.79 | 30.875 | 24.538 | +16.1% | -20.5% |
+| RB8 | Évora | 20.61 | 25.05 | 22.014 | 18.689 | +21.5% | -15.1% |
+| RB1 | Lisboa | 76.97 | 88.09 | 12.940 | 15.187 | +14.4% | +17.4% |
+| RB2 | Lisboa | 54.35 | 60.07 | 7.804 | 11.038 | +10.5% | +41.4% |
+| RB3 | Lisboa | 15.96 | 24.29 | 6.548 | 7.083 | +52.3% | +8.2% |
+| RB4 | Lisboa | 8.21 | 13.11 | 5.947 | 5.818 | +59.5% | -2.2% |
+| RB5 | Lisboa | 68.33 | 84.61 | 22.910 | 22.780 | +23.8% | -0.6% |
+| RB6 | Lisboa | 53.22 | 67.03 | 18.200 | 19.478 | +25.9% | +7.0% |
+| RB7 | Lisboa | 15.71 | 25.12 | 9.621 | 8.971 | +59.9% | -6.8% |
+| RB8 | Lisboa | 6.54 | 11.48 | 7.511 | 6.622 | +75.5% | -11.8% |
 
-## 7. Tabela S2 REVISTA — base REG-2013
+## 9. Por célula — base REG-2013
 
-| RB | cidade | N_ic 13790 | N_H 52016 | N_vc 13790 | N_C 52016 | ΔH | ΔC |
+| RB | cidade | N_ic | N_H | N_vc | N_C | Δ_H | Δ_C |
 |---|---|---|---|---|---|---|---|
 | RB1 | Coimbra | 169.56 | 177.85 | 11.675 | 15.118 | +4.9% | +29.5% |
 | RB2 | Coimbra | 127.46 | 126.56 | 6.279 | 10.675 | -0.7% | +70.0% |
@@ -134,14 +152,14 @@ Submetido = estado JBE. Revisto = α_parede 0,40 + desvão 0 **nos dois ramos** 
 | RB7 | Lisboa | 22.86 | 32.06 | 12.402 | 11.884 | +40.3% | -4.2% |
 | RB8 | Lisboa | 10.00 | 15.42 | 9.457 | 8.810 | +54.1% | -6.8% |
 
-## 8. Denominadores pequenos — absolutos ao lado (regra do projecto)
+## 10. Denominadores pequenos — absolutos ao lado
 
-As 5 células de menor N_vc (13790) na base DGEG2025-A, onde as % enganam:
+As cinco células de menor N_vc sazonal na base DGEG2025-A, onde as percentagens enganam:
 
-| cidade | RB | N_vc 13790 | N_C 52016 | Δ absoluto | Δ % |
+| cidade | RB | N_vc sazonal | N_C mensal | Δ absoluto | Δ % |
 |---|---|---|---|---|---|
-| Bragança | RB4 | 3.33 | 5.90 | +2.57 | +77.2% |
-| Bragança | RB3 | 3.55 | 7.31 | +3.76 | +106.1% |
-| Bragança | RB2 | 3.97 | 11.29 | +7.32 | +184.3% |
-| Bragança | RB8 | 4.29 | 7.20 | +2.91 | +67.9% |
-| Bragança | RB7 | 5.36 | 9.82 | +4.45 | +83.1% |
+| Bragança | RB4 | 3.41 | 6.02 | +2.61 | +76.5% |
+| Bragança | RB3 | 3.65 | 7.48 | +3.83 | +104.7% |
+| Bragança | RB2 | 4.12 | 11.60 | +7.48 | +181.5% |
+| Bragança | RB8 | 4.60 | 7.61 | +3.00 | +65.2% |
+| Bragança | RB7 | 5.78 | 10.38 | +4.60 | +79.6% |

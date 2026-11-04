@@ -1,3 +1,9 @@
+# ---- ORDEM DE EXECUCAO OBRIGATORIA ----
+# 1. gerar_figuras.py            -> Fig1..Fig7
+# 2. gerar_figuras_8_9.py        -> Fig8, Fig9
+# 3. gerar_figuras_fix_e_10.py   -> REESCREVE Fig1..Fig3, escreve Fig10
+# Correr so o (1) deixa Fig1-Fig3 superadas em silencio.
+#
 # --- fonte de dados unica: dados_a13.py -----------------------------------
 # [31/07/2026] O literal `T` com a base REG-2013, transcrito a mao, foi
 # SUBSTITUIDO por leitura do JSON. Continha um erro de transposicao em
@@ -34,6 +40,13 @@ for i,c in enumerate(D):
     c["dH25"]=(c["nh_52016"]/c["nic_13790"]-1)*100
     c["dH13"]=(R[i][1]/R[i][0]-1)*100
 
+NOMES_FIGS = {
+    1: "Fig1_cooling_threshold",
+    2: "Fig2_method_effect_conditional",
+    3: "Fig3_heatmap_dH",
+    10: "Fig10_utilisation_map",
+}
+
 # ---- FIG 1 (revista 01/08/2026): o proxy dimensional NAO separa ----
 # [01/08/2026] A versao anterior desenhava um limiar de 4 kWh/m2.a e anunciava
 # "median +93%" / "median -7%" como texto FIXO. Sob [P-alfa-A13-paridade] o
@@ -54,8 +67,8 @@ ax.set_xlabel("Seasonal cooling need $N_{vc}$  [kWh/m²·a, log scale]")
 ax.set_ylabel("Cooling divergence  $\\Delta_C$  [%]")
 ax.set_title("The seasonal magnitude alone does not separate the regimes")
 _n4=sum(1 for c in D if c["nvc_13790"]<4.0)
-ax.text(0.98,0.05,"only %d of 32 cells fall below 4 kWh/m²·a;\nthe separating criterion is $\\gamma_C$ (Fig. 8)"%_n4,
-        transform=ax.transAxes,fontsize=7.2,color=GREY,ha="right",style="italic")
+# [R1 03/11] A2: a nota passou para a legenda da figura (tapava pontos negativos).
+print("Fig1: %d de 32 celulas com Nvc < 4 (vai para a legenda)" % _n4)
 ax.legend(handles=[plt.Line2D([],[],marker="o",ls="",color=C25,label="DGEG2025-A base"),
  plt.Line2D([],[],marker="s",ls="",mfc="none",mec=C13,label="REG-2013 base")],
  loc="upper right",fontsize=7.2)
@@ -63,7 +76,9 @@ _lo=min(min(c["dC13"] for c in D),min(c["dC25"] for c in D))
 _hi=max(max(c["dC13"] for c in D),max(c["dC25"] for c in D))
 ax.set_ylim(_lo-25,_hi+45)
 for s_ in("top","right"): ax.spines[s_].set_visible(False)
-fig.savefig(f"{OUT}/Fig1_cooling_threshold.png"); plt.close(fig)
+fig.savefig(f"{OUT}/Fig1_cooling_threshold.png")
+fig.savefig(f"{OUT}/Fig1_cooling_threshold.pdf")
+fig.savefig(f"{OUT}/Fig1.pdf"); plt.close(fig)
 
 # ---- FIG 2 (corrigida): nomes completos no painel c ----
 def box(ax,data,labels,colors,title):
@@ -88,7 +103,9 @@ for a in axes[1:]: a.set_ylim(axes[0].get_ylim())
 for a,t in zip(axes,"abc"):
     a.text(-0.02,1.06,t,transform=a.transAxes,fontsize=10,fontweight="bold",ha="right",va="bottom")
 fig.suptitle("The method effect is conditional, not constant",y=1.02,fontsize=10,fontweight="bold")
-fig.savefig(f"{OUT}/Fig2_method_effect_conditional.png"); plt.close(fig)
+fig.savefig(f"{OUT}/Fig2_method_effect_conditional.png")
+fig.savefig(f"{OUT}/Fig2_method_effect_conditional.pdf")
+fig.savefig(f"{OUT}/Fig2.pdf"); plt.close(fig)
 
 # ---- FIG 3 (corrigida): espaçamento entre heatmaps ----
 M13=np.array([[[c for c in D if c["rb"]==r and c["cidade"]==k][0]["dH13"] for r in RBS] for k in CITIES])
@@ -110,7 +127,9 @@ for ax,M,t in zip(axes,[M13,M25],["REG-2013 base","DGEG2025-A base"]):
 cb=fig.colorbar(im,ax=axes,fraction=0.028,pad=0.02)
 cb.set_label("$\\Delta_H$  [%]",fontsize=8.5); cb.ax.tick_params(labelsize=7.5)
 fig.suptitle("Heating divergence across the 32 building×city combinations",y=1.04,fontsize=10,fontweight="bold")
-fig.savefig(f"{OUT}/Fig3_heatmap_dH.png"); plt.close(fig)
+fig.savefig(f"{OUT}/Fig3_heatmap_dH.png")
+fig.savefig(f"{OUT}/Fig3_heatmap_dH.pdf")
+fig.savefig(f"{OUT}/Fig3.pdf"); plt.close(fig)
 
 # ---- FIG 10 (nova): mapa de operação do fator de utilização ----
 G=_decomp()["celulas"]
@@ -139,10 +158,9 @@ ax.set_ylabel("Gain-utilisation factor  $\\eta_H$  [–]")
 ax.set_title("Operating map of the gain-utilisation factor")
 ax.set_xlim(0,2.6); ax.set_ylim(0.28,1.02)
 ax.legend(loc="lower left",fontsize=6.8)
-ax.annotate("seasonal: low $\\gamma$, high tabulated $\\alpha$\n→ near-total utilisation",
-            xy=(0.52,0.955),fontsize=7.2,color=C13,ha="left")
-ax.annotate("monthly: higher $\\gamma$, physical $\\alpha$\n→ lower utilisation",
-            xy=(1.35,0.62),fontsize=7.2,color=C25,ha="left")
+# [R1 03/11] A2: as duas anotacoes passaram para a legenda da figura (tapavam pontos).
 for s in("top","right"): ax.spines[s].set_visible(False)
-fig.savefig(f"{OUT}/Fig10_utilisation_map.png"); plt.close(fig)
+fig.savefig(f"{OUT}/Fig10_utilisation_map.png")
+fig.savefig(f"{OUT}/Fig10_utilisation_map.pdf")
+fig.savefig(f"{OUT}/Fig10.pdf"); plt.close(fig)
 print("OK figs 1,2,3,10")

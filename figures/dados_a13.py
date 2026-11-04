@@ -27,7 +27,14 @@ import json
 _AQUI = os.path.dirname(os.path.abspath(__file__))
 _RES = os.path.join(os.path.dirname(_AQUI), "resultados")
 
-REVISAO = ("--revisao" in sys.argv) or (os.environ.get("A13_REVISAO") == "1")
+_REVISAO_FLAG = ("--revisao" in sys.argv) or (os.environ.get("A13_REVISAO") == "1")
+_JBE_FLAG = "--submetido-jbe" in sys.argv
+if not _REVISAO_FLAG and not _JBE_FLAG:
+    raise SystemExit(
+        "⛔ Nenhuma base declarada. Correr com --revisao (dados do manuscrito actual)\n"
+        "   ou com --submetido-jbe (reproduzir o ramo JBE). Ver dados_a13.py:30."
+    )
+REVISAO = _REVISAO_FLAG
 _SFX = "_REVISAO" if REVISAO else ""
 ESTADO = "REVISTO [P-alfa-A13-paridade]" if REVISAO else "SUBMETIDO (JBE)"
 

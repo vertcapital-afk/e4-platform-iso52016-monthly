@@ -1,8 +1,9 @@
 {
   "meta": {
-    "experiencia": "cruzamento ingenuo RB6/Coimbra -- REVISTO"
+    "experiencia": "cruzamento ingenuo RB6/Coimbra -- R1, hora solar verificada (DGEG2025-A); REG-2013 inalterada",
+    "fonte": "resultados/fontes_HV/RESULTADO_A13_COMPLETO.json (necessidades.verificada e controlo_REG2013), racios sem arredondamento previo"
   },
-  "efeito_metodo_dgeg": 17.43,
+  "efeito_metodo_dgeg": 16.48,
   "efeito_metodo_2013": 10.07,
-  "cruzamento_ingenuo": 11.19
+  "cruzamento_ingenuo": 9.71
 }

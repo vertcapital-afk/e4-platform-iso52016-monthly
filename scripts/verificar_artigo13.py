@@ -1,5 +1,29 @@
 # -*- coding: utf-8 -*-
 """
+verificar_artigo13.py — TRIAGEM HISTÓRICA (depósito A13 R1, 04/11/2026).
+
+⚠️ É o verificador de ambiente do pacote privado do autor, como foi publicado
+com a versão submetida (anunciado 37/37; arquivado na tag
+public-before-R1-ENB-D-26-06604). Fica no R1 com o âmbito original: interfaces
+entre módulos, fixtures no lugar, âncoras físicas (pontes térmicas do RB6,
+amostra do oráculo Denver, oráculo do solo de Strasbourg), a âncora RB6/Coimbra
+da configuração submetida e três paridades de envolvente entre os ramos
+(absortância da parede, absortância da cobertura, resistência do desvão).
+
+NÃO verifica os números do R1: isso é o scripts/verificar_revisao_a13.py, que
+também confere os coeficientes de superfície de cada ramo (F1). As âncoras
+daqui são as validadas em 10-11/07/2026 e não dependem da hora solar.
+
+Precisa do motor, das fixtures e dos EPW do autor (pacote privado, disponível a
+pedido). Num clone limpo deste depósito não tem nada para triar: sai com o
+código 2 («não executado»). Com o motor: 0 se tudo passa, 1 se alguma falha.
+
+Uso: py scripts\\verificar_artigo13.py --motor C:\\caminho\\do\\motor
+     (ou com a variável E4_MOTOR; a raiz contém src/e4/, tests/fixtures/ e
+     studies/a13_iso52016_mensal/)
+
+Texto original (10-11/07/2026), mantido:
+
 Verificacao Artigo 13 (kernel ISO 52016-1 mensal) — Windows-friendly.
 
 Uso (a partir de C:\\e4-platform\\motor):
@@ -17,11 +41,30 @@ Nao substitui a suite (py -m pytest tests\\) — e o triagem rapido pos-sync.
 import os
 import sys
 
-# Caminhos relativos à RAIZ DO REPOSITÓRIO (reorganização de 28/07/2026).
-# Antes: RAIZ = pasta do script, + "e4". Hoje o pacote é src/e4 e o script
-# vive em studies/a13_iso52016_mensal/ — era esta a causa das 19 falhas.
-AQUI = os.path.dirname(os.path.abspath(__file__))
-RAIZ = os.path.dirname(os.path.dirname(AQUI))
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+sys.dont_write_bytecode = True   # uma triagem não escreve: nem __pycache__ no motor
+
+# [R1, 04/11/2026] No depósito público o script não vive dentro do motor. A
+# raiz do motor do autor indica-se com --motor CAMINHO ou E4_MOTOR. Sem ela não
+# há nada para triar: sai com o código 2 («não executado»), nunca com 0.
+# (Antes de 28/07/2026: RAIZ = pasta do script + "e4"; depois, a raiz do
+# repositório privado, com o pacote em src/e4 e o script em
+# studies/a13_iso52016_mensal/.)
+_ARGS = sys.argv[1:]
+RAIZ = os.environ.get("E4_MOTOR")
+if "--motor" in _ARGS:
+    _i = _ARGS.index("--motor")
+    RAIZ = _ARGS[_i + 1] if _i + 1 < len(_ARGS) else None
+if not RAIZ or not os.path.isdir(os.path.join(RAIZ, "src", "e4")):
+    print("verificar_artigo13.py — triagem histórica do ambiente privado do autor.")
+    print("Não executado: indicar a raiz do motor (--motor CAMINHO ou E4_MOTOR), que")
+    print("contém src/e4/, tests/fixtures/ e studies/a13_iso52016_mensal/.")
+    print("Os números do R1 verificam-se com scripts/verificar_revisao_a13.py.")
+    print("Código de saída: 2")
+    sys.exit(2)
+RAIZ = os.path.abspath(RAIZ)
+AQUI = os.path.join(RAIZ, "studies", "a13_iso52016_mensal")
 sys.path.insert(0, os.path.join(RAIZ, "src", "e4"))   # imports directos
 sys.path.insert(0, os.path.join(RAIZ, "src"))         # import e4.*
 sys.path.insert(0, AQUI)                              # run_grelha_artigo13

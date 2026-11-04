@@ -1,0 +1,1645 @@
+{
+  "meta": {
+    "base": "DGEG2025-A",
+    "hora": "verificada",
+    "eixo": "sazonal celula_13790 apenas",
+    "configuracao": {
+      "alfa_parede": 0.4,
+      "desvao_cob": 0.0,
+      "h_ce": 20.0
+    },
+    "janelas": {
+      "Out–Abr": [
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "Nov–Mar": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "Out–Mar": [
+        10,
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "Nov–Abr": [
+        11,
+        12,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "celulas_por_janela": 32,
+    "observacoes": 128,
+    "chamadas_sazonais_incluindo_CN": 160,
+    "tolerancia_regressao": 1e-09,
+    "fontes_sha256": {
+      "C:\\Users\\sftadeu\\.codex\\outputs\\e4-auditorias\\2026-10-30-tema1\\RESULTADO_A13_COMPLETO.json": "69c4e74633af59ea6ae06a3402847cfb061c56276acc187c19d2329f6dafb82c",
+      "C:\\e4-platform\\studies\\a13_iso52016_mensal\\run_grelha_artigo13.py": "6ff81d767f32db3c5ecda79914898c3886bcaebeb74af454d6d321f0589a7b5a",
+      "C:\\e4-platform\\studies\\a13_iso52016_mensal\\revisao_a13_producao.py": "5320fd687d36f3cf63416addcee3cda595661fe6ddcb8ece5a359bc2b4428d0c",
+      "C:\\e4-platform\\studies\\a13_iso52016_mensal\\revisao\\sensibilidades_hv\\hv_patch.py": "bb0c5fc459cb46928e15c7a0af72d75fd51ff260c1676f037cb1a15c8c0cfe9c",
+      "C:\\e4-platform\\src\\e4\\fixtures\\clima\\Coimbra_255m.epw": "ea847e6eb3d1c05cedf3d4b291f273439019faad0a2fbe7e51afa2f3fffb15be",
+      "C:\\e4-platform\\src\\e4\\fixtures\\clima\\Bragança_907m.epw": "e3eb3aadc14e87578ad9c0f1b2601ef571ec71bb898a1861e8e09626e8c011a5",
+      "C:\\e4-platform\\src\\e4\\fixtures\\clima\\Évora_296m.epw": "850de4545be4ea3de65ff5f327cda1a0b7002119a655f7a6e7fa783bcb41b12c",
+      "C:\\e4-platform\\src\\e4\\fixtures\\clima\\Lisboa_114m.epw": "514fbf302e7ad79a304f0788c67f32dfdc8fed7e5c28c60740b2435764d2cb82"
+    },
+    "script_sha256": "0756acaa8573b7e640617f97a1fee962ff35c24b5207d2bd1a4c7ca779f70b89",
+    "reposicao_confirmada": true
+  },
+  "controlos": {
+    "regressao": [
+      {
+        "rb": "RB1",
+        "cidade": "Coimbra",
+        "nic": 154.4053027070447,
+        "referencia": 154.4053027070447,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB2",
+        "cidade": "Coimbra",
+        "nic": 117.19224718314092,
+        "referencia": 117.19224718314092,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB3",
+        "cidade": "Coimbra",
+        "nic": 47.688258800501295,
+        "referencia": 47.688258800501295,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB4",
+        "cidade": "Coimbra",
+        "nic": 28.093963799242534,
+        "referencia": 28.093963799242534,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB5",
+        "cidade": "Coimbra",
+        "nic": 141.08470111937672,
+        "referencia": 141.08470111937672,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB6",
+        "cidade": "Coimbra",
+        "nic": 118.16977529152375,
+        "referencia": 118.16977529152375,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB7",
+        "cidade": "Coimbra",
+        "nic": 45.60119839239691,
+        "referencia": 45.60119839239691,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB8",
+        "cidade": "Coimbra",
+        "nic": 22.888560727075742,
+        "referencia": 22.888560727075742,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB1",
+        "cidade": "Bragança",
+        "nic": 309.52979123706257,
+        "referencia": 309.52979123706257,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB2",
+        "cidade": "Bragança",
+        "nic": 239.63895722656912,
+        "referencia": 239.63895722656912,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB3",
+        "cidade": "Bragança",
+        "nic": 112.21834504225767,
+        "referencia": 112.21834504225767,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB4",
+        "cidade": "Bragança",
+        "nic": 71.57194588186988,
+        "referencia": 71.57194588186988,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB5",
+        "cidade": "Bragança",
+        "nic": 285.1350879921451,
+        "referencia": 285.1350879921451,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB6",
+        "cidade": "Bragança",
+        "nic": 242.86739532302911,
+        "referencia": 242.86739532302911,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB7",
+        "cidade": "Bragança",
+        "nic": 106.61270042541551,
+        "referencia": 106.61270042541551,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB8",
+        "cidade": "Bragança",
+        "nic": 59.920003921626865,
+        "referencia": 59.920003921626865,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB1",
+        "cidade": "Évora",
+        "nic": 141.6802843030502,
+        "referencia": 141.6802843030502,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB2",
+        "cidade": "Évora",
+        "nic": 107.46667534444066,
+        "referencia": 107.46667534444066,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB3",
+        "cidade": "Évora",
+        "nic": 42.75382383569231,
+        "referencia": 42.75382383569231,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB4",
+        "cidade": "Évora",
+        "nic": 25.128056264711233,
+        "referencia": 25.128056264711233,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB5",
+        "cidade": "Évora",
+        "nic": 128.77988324698,
+        "referencia": 128.77988324698,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB6",
+        "cidade": "Évora",
+        "nic": 107.72937857465283,
+        "referencia": 107.72937857465283,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB7",
+        "cidade": "Évora",
+        "nic": 41.16269672911407,
+        "referencia": 41.16269672911407,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB8",
+        "cidade": "Évora",
+        "nic": 20.614167698371844,
+        "referencia": 20.614167698371844,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB1",
+        "cidade": "Lisboa",
+        "nic": 76.9730334771026,
+        "referencia": 76.9730334771026,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB2",
+        "cidade": "Lisboa",
+        "nic": 54.34712821782468,
+        "referencia": 54.34712821782468,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB3",
+        "cidade": "Lisboa",
+        "nic": 15.954809841564577,
+        "referencia": 15.954809841564577,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB4",
+        "cidade": "Lisboa",
+        "nic": 8.214132340425579,
+        "referencia": 8.214132340425579,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB5",
+        "cidade": "Lisboa",
+        "nic": 68.33391198845129,
+        "referencia": 68.33391198845129,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB6",
+        "cidade": "Lisboa",
+        "nic": 53.22379137826912,
+        "referencia": 53.22379137826912,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB7",
+        "cidade": "Lisboa",
+        "nic": 15.714165570969232,
+        "referencia": 15.714165570969232,
+        "erro_abs": 0.0
+      },
+      {
+        "rb": "RB8",
+        "cidade": "Lisboa",
+        "nic": 6.543171260833376,
+        "referencia": 6.543171260833376,
+        "erro_abs": 0.0
+      }
+    ],
+    "CN_cabecalho": [
+      {
+        "rb": "RB1",
+        "cidade": "Coimbra",
+        "nic_cabecalho": 154.41698558784447,
+        "nic_HV": 154.4053027070447,
+        "erro_abs": 0.011682880799753548
+      },
+      {
+        "rb": "RB2",
+        "cidade": "Coimbra",
+        "nic_cabecalho": 117.24854805934191,
+        "nic_HV": 117.19224718314092,
+        "erro_abs": 0.05630087620099289
+      },
+      {
+        "rb": "RB3",
+        "cidade": "Coimbra",
+        "nic_cabecalho": 47.8088200997096,
+        "nic_HV": 47.688258800501295,
+        "erro_abs": 0.12056129920830472
+      },
+      {
+        "rb": "RB4",
+        "cidade": "Coimbra",
+        "nic_cabecalho": 28.191483780926546,
+        "nic_HV": 28.093963799242534,
+        "erro_abs": 0.09751998168401244
+      },
+      {
+        "rb": "RB5",
+        "cidade": "Coimbra",
+        "nic_cabecalho": 141.84519723709354,
+        "nic_HV": 141.08470111937672,
+        "erro_abs": 0.7604961177168263
+      },
+      {
+        "rb": "RB6",
+        "cidade": "Coimbra",
+        "nic_cabecalho": 118.79868849723158,
+        "nic_HV": 118.16977529152375,
+        "erro_abs": 0.6289132057078319
+      },
+      {
+        "rb": "RB7",
+        "cidade": "Coimbra",
+        "nic_cabecalho": 45.9581613825084,
+        "nic_HV": 45.60119839239691,
+        "erro_abs": 0.3569629901114908
+      },
+      {
+        "rb": "RB8",
+        "cidade": "Coimbra",
+        "nic_cabecalho": 23.09129175767377,
+        "nic_HV": 22.888560727075742,
+        "erro_abs": 0.20273103059802722
+      },
+      {
+        "rb": "RB1",
+        "cidade": "Bragança",
+        "nic_cabecalho": 310.7769527605486,
+        "nic_HV": 309.52979123706257,
+        "erro_abs": 1.2471615234860565
+      },
+      {
+        "rb": "RB2",
+        "cidade": "Bragança",
+        "nic_cabecalho": 240.6453196492694,
+        "nic_HV": 239.63895722656912,
+        "erro_abs": 1.0063624227002776
+      },
+      {
+        "rb": "RB3",
+        "cidade": "Bragança",
+        "nic_cabecalho": 113.13038828212932,
+        "nic_HV": 112.21834504225767,
+        "erro_abs": 0.9120432398716503
+      },
+      {
+        "rb": "RB4",
+        "cidade": "Bragança",
+        "nic_cabecalho": 72.27112239420408,
+        "nic_HV": 71.57194588186988,
+        "erro_abs": 0.6991765123342049
+      },
+      {
+        "rb": "RB5",
+        "cidade": "Bragança",
+        "nic_cabecalho": 286.9084739892003,
+        "nic_HV": 285.1350879921451,
+        "erro_abs": 1.7733859970551862
+      },
+      {
+        "rb": "RB6",
+        "cidade": "Bragança",
+        "nic_cabecalho": 244.3401602305838,
+        "nic_HV": 242.86739532302911,
+        "erro_abs": 1.4727649075546765
+      },
+      {
+        "rb": "RB7",
+        "cidade": "Bragança",
+        "nic_cabecalho": 107.62597423651602,
+        "nic_HV": 106.61270042541551,
+        "erro_abs": 1.013273811100504
+      },
+      {
+        "rb": "RB8",
+        "cidade": "Bragança",
+        "nic_cabecalho": 60.62795697610872,
+        "nic_HV": 59.920003921626865,
+        "erro_abs": 0.7079530544818553
+      },
+      {
+        "rb": "RB1",
+        "cidade": "Évora",
+        "nic_cabecalho": 142.70677165270902,
+        "nic_HV": 141.6802843030502,
+        "erro_abs": 1.0264873496588223
+      },
+      {
+        "rb": "RB2",
+        "cidade": "Évora",
+        "nic_cabecalho": 108.33493081119587,
+        "nic_HV": 107.46667534444066,
+        "erro_abs": 0.8682554667552154
+      },
+      {
+        "rb": "RB3",
+        "cidade": "Évora",
+        "nic_cabecalho": 43.41967754888489,
+        "nic_HV": 42.75382383569231,
+        "erro_abs": 0.6658537131925826
+      },
+      {
+        "rb": "RB4",
+        "cidade": "Évora",
+        "nic_cabecalho": 25.589211424088848,
+        "nic_HV": 25.128056264711233,
+        "erro_abs": 0.46115515937761486
+      },
+      {
+        "rb": "RB5",
+        "cidade": "Évora",
+        "nic_cabecalho": 130.18047953893367,
+        "nic_HV": 128.77988324698,
+        "erro_abs": 1.4005962919536614
+      },
+      {
+        "rb": "RB6",
+        "cidade": "Évora",
+        "nic_cabecalho": 108.9666418683696,
+        "nic_HV": 107.72937857465283,
+        "erro_abs": 1.2372632937167793
+      },
+      {
+        "rb": "RB7",
+        "cidade": "Évora",
+        "nic_cabecalho": 41.91196720781871,
+        "nic_HV": 41.16269672911407,
+        "erro_abs": 0.7492704787046449
+      },
+      {
+        "rb": "RB8",
+        "cidade": "Évora",
+        "nic_cabecalho": 21.069283159371594,
+        "nic_HV": 20.614167698371844,
+        "erro_abs": 0.45511546099974964
+      },
+      {
+        "rb": "RB1",
+        "cidade": "Lisboa",
+        "nic_cabecalho": 78.42974637779201,
+        "nic_HV": 76.9730334771026,
+        "erro_abs": 1.4567129006894106
+      },
+      {
+        "rb": "RB2",
+        "cidade": "Lisboa",
+        "nic_cabecalho": 55.6866174842426,
+        "nic_HV": 54.34712821782468,
+        "erro_abs": 1.339489266417921
+      },
+      {
+        "rb": "RB3",
+        "cidade": "Lisboa",
+        "nic_cabecalho": 16.709021767627434,
+        "nic_HV": 15.954809841564577,
+        "erro_abs": 0.7542119260628564
+      },
+      {
+        "rb": "RB4",
+        "cidade": "Lisboa",
+        "nic_cabecalho": 8.654365317722851,
+        "nic_HV": 8.214132340425579,
+        "erro_abs": 0.4402329772972724
+      },
+      {
+        "rb": "RB5",
+        "cidade": "Lisboa",
+        "nic_cabecalho": 70.13950487183035,
+        "nic_HV": 68.33391198845129,
+        "erro_abs": 1.805592883379063
+      },
+      {
+        "rb": "RB6",
+        "cidade": "Lisboa",
+        "nic_cabecalho": 54.97883929813249,
+        "nic_HV": 53.22379137826912,
+        "erro_abs": 1.7550479198633724
+      },
+      {
+        "rb": "RB7",
+        "cidade": "Lisboa",
+        "nic_cabecalho": 16.52153976055178,
+        "nic_HV": 15.714165570969232,
+        "erro_abs": 0.8073741895825464
+      },
+      {
+        "rb": "RB8",
+        "cidade": "Lisboa",
+        "nic_cabecalho": 6.93316238220483,
+        "nic_HV": 6.543171260833376,
+        "erro_abs": 0.38999112137145353
+      }
+    ],
+    "perturbacao_gsul": {
+      "Coimbra": {
+        "producao": 96.54242138160815,
+        "nov_mar": 92.19907986384824,
+        "delta": -4.34334151775991
+      },
+      "Bragança": {
+        "producao": 110.29215203839581,
+        "nov_mar": 108.16349539603189,
+        "delta": -2.1286566423639215
+      },
+      "Évora": {
+        "producao": 115.95436283656433,
+        "nov_mar": 117.44519676444088,
+        "delta": 1.490833927876551
+      },
+      "Lisboa": {
+        "producao": 116.71061522520073,
+        "nov_mar": 119.06887429586284,
+        "delta": 2.3582590706621147
+      }
+    }
+  },
+  "celulas": [
+    {
+      "rb": "RB1",
+      "cidade": "Coimbra",
+      "janela": "Out–Abr",
+      "gsul": 96.54242138160815,
+      "nic": 154.4053027070447,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Coimbra",
+      "janela": "Out–Abr",
+      "gsul": 96.54242138160815,
+      "nic": 117.19224718314092,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Coimbra",
+      "janela": "Out–Abr",
+      "gsul": 96.54242138160815,
+      "nic": 47.688258800501295,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Coimbra",
+      "janela": "Out–Abr",
+      "gsul": 96.54242138160815,
+      "nic": 28.093963799242534,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Coimbra",
+      "janela": "Out–Abr",
+      "gsul": 96.54242138160815,
+      "nic": 141.08470111937672,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Coimbra",
+      "janela": "Out–Abr",
+      "gsul": 96.54242138160815,
+      "nic": 118.16977529152375,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Coimbra",
+      "janela": "Out–Abr",
+      "gsul": 96.54242138160815,
+      "nic": 45.60119839239691,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Coimbra",
+      "janela": "Out–Abr",
+      "gsul": 96.54242138160815,
+      "nic": 22.888560727075742,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Bragança",
+      "janela": "Out–Abr",
+      "gsul": 110.29215203839581,
+      "nic": 309.52979123706257,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Bragança",
+      "janela": "Out–Abr",
+      "gsul": 110.29215203839581,
+      "nic": 239.63895722656912,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Bragança",
+      "janela": "Out–Abr",
+      "gsul": 110.29215203839581,
+      "nic": 112.21834504225767,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Bragança",
+      "janela": "Out–Abr",
+      "gsul": 110.29215203839581,
+      "nic": 71.57194588186988,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Bragança",
+      "janela": "Out–Abr",
+      "gsul": 110.29215203839581,
+      "nic": 285.1350879921451,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Bragança",
+      "janela": "Out–Abr",
+      "gsul": 110.29215203839581,
+      "nic": 242.86739532302911,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Bragança",
+      "janela": "Out–Abr",
+      "gsul": 110.29215203839581,
+      "nic": 106.61270042541551,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Bragança",
+      "janela": "Out–Abr",
+      "gsul": 110.29215203839581,
+      "nic": 59.920003921626865,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Évora",
+      "janela": "Out–Abr",
+      "gsul": 115.95436283656433,
+      "nic": 141.6802843030502,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Évora",
+      "janela": "Out–Abr",
+      "gsul": 115.95436283656433,
+      "nic": 107.46667534444066,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Évora",
+      "janela": "Out–Abr",
+      "gsul": 115.95436283656433,
+      "nic": 42.75382383569231,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Évora",
+      "janela": "Out–Abr",
+      "gsul": 115.95436283656433,
+      "nic": 25.128056264711233,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Évora",
+      "janela": "Out–Abr",
+      "gsul": 115.95436283656433,
+      "nic": 128.77988324698,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Évora",
+      "janela": "Out–Abr",
+      "gsul": 115.95436283656433,
+      "nic": 107.72937857465283,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Évora",
+      "janela": "Out–Abr",
+      "gsul": 115.95436283656433,
+      "nic": 41.16269672911407,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Évora",
+      "janela": "Out–Abr",
+      "gsul": 115.95436283656433,
+      "nic": 20.614167698371844,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Lisboa",
+      "janela": "Out–Abr",
+      "gsul": 116.71061522520073,
+      "nic": 76.9730334771026,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Lisboa",
+      "janela": "Out–Abr",
+      "gsul": 116.71061522520073,
+      "nic": 54.34712821782468,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Lisboa",
+      "janela": "Out–Abr",
+      "gsul": 116.71061522520073,
+      "nic": 15.954809841564577,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Lisboa",
+      "janela": "Out–Abr",
+      "gsul": 116.71061522520073,
+      "nic": 8.214132340425579,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Lisboa",
+      "janela": "Out–Abr",
+      "gsul": 116.71061522520073,
+      "nic": 68.33391198845129,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Lisboa",
+      "janela": "Out–Abr",
+      "gsul": 116.71061522520073,
+      "nic": 53.22379137826912,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Lisboa",
+      "janela": "Out–Abr",
+      "gsul": 116.71061522520073,
+      "nic": 15.714165570969232,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Lisboa",
+      "janela": "Out–Abr",
+      "gsul": 116.71061522520073,
+      "nic": 6.543171260833376,
+      "delta_pct": 0.0
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Coimbra",
+      "janela": "Nov–Mar",
+      "gsul": 92.19907986384824,
+      "nic": 156.4389668068269,
+      "delta_pct": 1.3170947267534538
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Coimbra",
+      "janela": "Nov–Mar",
+      "gsul": 92.19907986384824,
+      "nic": 119.03085585074699,
+      "delta_pct": 1.5688825086976887
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Coimbra",
+      "janela": "Nov–Mar",
+      "gsul": 92.19907986384824,
+      "nic": 49.34837486725908,
+      "delta_pct": 3.481184066087839
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Coimbra",
+      "janela": "Nov–Mar",
+      "gsul": 92.19907986384824,
+      "nic": 29.292748859076692,
+      "delta_pct": 4.267055615222515
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Coimbra",
+      "janela": "Nov–Mar",
+      "gsul": 92.19907986384824,
+      "nic": 143.48910621249962,
+      "delta_pct": 1.7042280800442455
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Coimbra",
+      "janela": "Nov–Mar",
+      "gsul": 92.19907986384824,
+      "nic": 120.4535668283166,
+      "delta_pct": 1.9326359309381314
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Coimbra",
+      "janela": "Nov–Mar",
+      "gsul": 92.19907986384824,
+      "nic": 47.1342206961783,
+      "delta_pct": 3.36180266709174
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Coimbra",
+      "janela": "Nov–Mar",
+      "gsul": 92.19907986384824,
+      "nic": 23.900066825200657,
+      "delta_pct": 4.419264759309938
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Bragança",
+      "janela": "Nov–Mar",
+      "gsul": 108.16349539603189,
+      "nic": 310.7941582956014,
+      "delta_pct": 0.40847992481940487
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Bragança",
+      "janela": "Nov–Mar",
+      "gsul": 108.16349539603189,
+      "nic": 240.72423728746355,
+      "delta_pct": 0.4528813150644462
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Bragança",
+      "janela": "Nov–Mar",
+      "gsul": 108.16349539603189,
+      "nic": 113.32280512737793,
+      "delta_pct": 0.9842063565492554
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Bragança",
+      "janela": "Nov–Mar",
+      "gsul": 108.16349539603189,
+      "nic": 72.44182469745425,
+      "delta_pct": 1.2153907580214618
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Bragança",
+      "janela": "Nov–Mar",
+      "gsul": 108.16349539603189,
+      "nic": 286.64206063174413,
+      "delta_pct": 0.5285118188051774
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Bragança",
+      "janela": "Nov–Mar",
+      "gsul": 108.16349539603189,
+      "nic": 244.21925812132935,
+      "delta_pct": 0.556625888996809
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Bragança",
+      "janela": "Nov–Mar",
+      "gsul": 108.16349539603189,
+      "nic": 107.6228210521372,
+      "delta_pct": 0.9474674430823171
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Bragança",
+      "janela": "Nov–Mar",
+      "gsul": 108.16349539603189,
+      "nic": 60.675463241083776,
+      "delta_pct": 1.2607798231205392
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Évora",
+      "janela": "Nov–Mar",
+      "gsul": 117.44519676444088,
+      "nic": 141.1025917127519,
+      "delta_pct": -0.40774381074972776
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Évora",
+      "janela": "Nov–Mar",
+      "gsul": 117.44519676444088,
+      "nic": 106.94005833089328,
+      "delta_pct": -0.49002819884352844
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Évora",
+      "janela": "Nov–Mar",
+      "gsul": 117.44519676444088,
+      "nic": 42.293173070035984,
+      "delta_pct": -1.0774492766463584
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Évora",
+      "janela": "Nov–Mar",
+      "gsul": 117.44519676444088,
+      "nic": 24.7996619223337,
+      "delta_pct": -1.3068831863398689
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Évora",
+      "janela": "Nov–Mar",
+      "gsul": 117.44519676444088,
+      "nic": 128.10145587128457,
+      "delta_pct": -0.5268116095386688
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Évora",
+      "janela": "Nov–Mar",
+      "gsul": 117.44519676444088,
+      "nic": 107.07745924298571,
+      "delta_pct": -0.6051453561623954
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Évora",
+      "janela": "Nov–Mar",
+      "gsul": 117.44519676444088,
+      "nic": 40.734618415288566,
+      "delta_pct": -1.039966639315748
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Évora",
+      "janela": "Nov–Mar",
+      "gsul": 117.44519676444088,
+      "nic": 20.336185729401006,
+      "delta_pct": -1.3484996000725946
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Lisboa",
+      "janela": "Nov–Mar",
+      "gsul": 119.06887429586284,
+      "nic": 76.21488724174823,
+      "delta_pct": -0.9849504444694901
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Lisboa",
+      "janela": "Nov–Mar",
+      "gsul": 119.06887429586284,
+      "nic": 53.61377883975214,
+      "delta_pct": -1.3493801827637597
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Lisboa",
+      "janela": "Nov–Mar",
+      "gsul": 119.06887429586284,
+      "nic": 15.513879458450644,
+      "delta_pct": -2.7636204222581617
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Lisboa",
+      "janela": "Nov–Mar",
+      "gsul": 119.06887429586284,
+      "nic": 7.95364252743885,
+      "delta_pct": -3.171239544129778
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Lisboa",
+      "janela": "Nov–Mar",
+      "gsul": 119.06887429586284,
+      "nic": 67.47018718798084,
+      "delta_pct": -1.2639768093716364
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Lisboa",
+      "janela": "Nov–Mar",
+      "gsul": 119.06887429586284,
+      "nic": 52.33574397119507,
+      "delta_pct": -1.6685158724649374
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Lisboa",
+      "janela": "Nov–Mar",
+      "gsul": 119.06887429586284,
+      "nic": 15.291007409731883,
+      "delta_pct": -2.6928452505241673
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Lisboa",
+      "janela": "Nov–Mar",
+      "gsul": 119.06887429586284,
+      "nic": 6.331897851637578,
+      "delta_pct": -3.228914554941509
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Coimbra",
+      "janela": "Out–Mar",
+      "gsul": 96.09283768079735,
+      "nic": 154.6148796891749,
+      "delta_pct": 0.13573172582539428
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Coimbra",
+      "janela": "Out–Mar",
+      "gsul": 96.09283768079735,
+      "nic": 117.38212149031875,
+      "delta_pct": 0.16201951216201493
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Coimbra",
+      "janela": "Out–Mar",
+      "gsul": 96.09283768079735,
+      "nic": 47.85835388994374,
+      "delta_pct": 0.35668127484800305
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Coimbra",
+      "janela": "Out–Mar",
+      "gsul": 96.09283768079735,
+      "nic": 28.2162320473503,
+      "delta_pct": 0.4352118091326851
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Coimbra",
+      "janela": "Out–Mar",
+      "gsul": 96.09283768079735,
+      "nic": 141.33211745709545,
+      "delta_pct": 0.17536723383593245
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Coimbra",
+      "janela": "Out–Mar",
+      "gsul": 96.09283768079735,
+      "nic": 118.4054692682271,
+      "delta_pct": 0.19945368950891051
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Coimbra",
+      "janela": "Out–Mar",
+      "gsul": 96.09283768079735,
+      "nic": 45.75837443724254,
+      "delta_pct": 0.3446752506220063
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Coimbra",
+      "janela": "Out–Mar",
+      "gsul": 96.09283768079735,
+      "nic": 22.991617582669303,
+      "delta_pct": 0.4502548536031492
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Bragança",
+      "janela": "Out–Mar",
+      "gsul": 111.64751543557645,
+      "nic": 308.7263185088966,
+      "delta_pct": -0.2595784802990386
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Bragança",
+      "janela": "Out–Mar",
+      "gsul": 111.64751543557645,
+      "nic": 238.94838465130786,
+      "delta_pct": -0.28817208322616805
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Bragança",
+      "janela": "Out–Mar",
+      "gsul": 111.64751543557645,
+      "nic": 111.51755115969296,
+      "delta_pct": -0.624491371977387
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Bragança",
+      "janela": "Out–Mar",
+      "gsul": 111.64751543557645,
+      "nic": 71.02108389355637,
+      "delta_pct": -0.7696618857096826
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Bragança",
+      "janela": "Out–Mar",
+      "gsul": 111.64751543557645,
+      "nic": 284.17809873878286,
+      "delta_pct": -0.33562661828157037
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Bragança",
+      "janela": "Out–Mar",
+      "gsul": 111.64751543557645,
+      "nic": 242.0073612067735,
+      "delta_pct": -0.3541167455235028
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Bragança",
+      "janela": "Out–Mar",
+      "gsul": 111.64751543557645,
+      "nic": 105.97156761950325,
+      "delta_pct": -0.6013662568849276
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Bragança",
+      "janela": "Out–Mar",
+      "gsul": 111.64751543557645,
+      "nic": 59.44182061658416,
+      "delta_pct": -0.7980361711393602
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Évora",
+      "janela": "Out–Mar",
+      "gsul": 117.78430185442001,
+      "nic": 140.97144495862972,
+      "delta_pct": -0.5003090923394127
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Évora",
+      "janela": "Out–Mar",
+      "gsul": 117.78430185442001,
+      "nic": 106.82040248974961,
+      "delta_pct": -0.6013704737954151
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Évora",
+      "janela": "Out–Mar",
+      "gsul": 117.78430185442001,
+      "nic": 42.18888020923342,
+      "delta_pct": -1.3213873655606445
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Évora",
+      "janela": "Out–Mar",
+      "gsul": 117.78430185442001,
+      "nic": 24.725456387969572,
+      "delta_pct": -1.602192674596381
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Évora",
+      "janela": "Out–Mar",
+      "gsul": 117.78430185442001,
+      "nic": 127.94754363951668,
+      "delta_pct": -0.6463273505746381
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Évora",
+      "janela": "Out–Mar",
+      "gsul": 117.78430185442001,
+      "nic": 106.92938222627095,
+      "delta_pct": -0.7425981277962235
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Évora",
+      "janela": "Out–Mar",
+      "gsul": 117.78430185442001,
+      "nic": 40.637669217045485,
+      "delta_pct": -1.2754934778052007
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Évora",
+      "janela": "Out–Mar",
+      "gsul": 117.78430185442001,
+      "nic": 20.273397168377336,
+      "delta_pct": -1.653088957947224
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Lisboa",
+      "janela": "Out–Mar",
+      "gsul": 120.04154042428576,
+      "nic": 75.90430995461261,
+      "delta_pct": -1.3884388781532198
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Lisboa",
+      "janela": "Out–Mar",
+      "gsul": 120.04154042428576,
+      "nic": 53.313156347976594,
+      "delta_pct": -1.9025326705468304
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Lisboa",
+      "janela": "Out–Mar",
+      "gsul": 120.04154042428576,
+      "nic": 15.335469214924242,
+      "delta_pct": -3.8818427345142292
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Lisboa",
+      "janela": "Out–Mar",
+      "gsul": 120.04154042428576,
+      "nic": 7.848730826020311,
+      "delta_pct": -4.448449321992987
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Lisboa",
+      "janela": "Out–Mar",
+      "gsul": 120.04154042428576,
+      "nic": 67.1171465770089,
+      "delta_pct": -1.7806172309409618
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Lisboa",
+      "janela": "Out–Mar",
+      "gsul": 120.04154042428576,
+      "nic": 51.972376525515664,
+      "delta_pct": -2.3512320718745316
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Lisboa",
+      "janela": "Out–Mar",
+      "gsul": 120.04154042428576,
+      "nic": 15.119646281217387,
+      "delta_pct": -3.7833334965629795
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Lisboa",
+      "janela": "Out–Mar",
+      "gsul": 120.04154042428576,
+      "nic": 6.246873227147296,
+      "delta_pct": -4.528355164103437
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Coimbra",
+      "janela": "Nov–Abr",
+      "gsul": 93.37255381761902,
+      "nic": 155.8875455627429,
+      "delta_pct": 0.9599688804149853
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Coimbra",
+      "janela": "Nov–Abr",
+      "gsul": 93.37255381761902,
+      "nic": 118.53317604898352,
+      "delta_pct": 1.1442129475912166
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Coimbra",
+      "janela": "Nov–Abr",
+      "gsul": 93.37255381761902,
+      "nic": 48.89615835701097,
+      "delta_pct": 2.532907652516303
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Coimbra",
+      "janela": "Nov–Abr",
+      "gsul": 93.37255381761902,
+      "nic": 28.965000878396566,
+      "delta_pct": 3.10044209275131
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Coimbra",
+      "janela": "Nov–Abr",
+      "gsul": 93.37255381761902,
+      "nic": 142.83638238214903,
+      "delta_pct": 1.2415812975286045
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Coimbra",
+      "janela": "Nov–Abr",
+      "gsul": 93.37255381761902,
+      "nic": 119.83506139990875,
+      "delta_pct": 1.4092318482257893
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Coimbra",
+      "janela": "Nov–Abr",
+      "gsul": 93.37255381761902,
+      "nic": 46.71684434114647,
+      "delta_pct": 2.4465276968150373
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Coimbra",
+      "janela": "Nov–Abr",
+      "gsul": 93.37255381761902,
+      "nic": 23.623283129464827,
+      "delta_pct": 3.209998265727365
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Bragança",
+      "janela": "Nov–Abr",
+      "gsul": 107.16290810591191,
+      "nic": 311.389520883105,
+      "delta_pct": 0.6008241205506692
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Bragança",
+      "janela": "Nov–Abr",
+      "gsul": 107.16290810591191,
+      "nic": 241.23467159146264,
+      "delta_pct": 0.6658827026128522
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Bragança",
+      "janela": "Nov–Abr",
+      "gsul": 107.16290810591191,
+      "nic": 113.84355550474694,
+      "delta_pct": 1.4482573788423547
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Bragança",
+      "janela": "Nov–Abr",
+      "gsul": 107.16290810591191,
+      "nic": 72.85268815606018,
+      "delta_pct": 1.7894473294105762
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Bragança",
+      "janela": "Nov–Abr",
+      "gsul": 107.16290810591191,
+      "nic": 287.35208933257616,
+      "delta_pct": 0.7775266650073442
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Bragança",
+      "janela": "Nov–Abr",
+      "gsul": 107.16290810591191,
+      "nic": 244.8551799483908,
+      "delta_pct": 0.8184649992716508
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Bragança",
+      "janela": "Nov–Abr",
+      "gsul": 107.16290810591191,
+      "nic": 108.09895989371573,
+      "delta_pct": 1.3940735600633136
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Bragança",
+      "janela": "Nov–Abr",
+      "gsul": 107.16290810591191,
+      "nic": 61.03243061240542,
+      "delta_pct": 1.8565197229185149
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Évora",
+      "janela": "Nov–Abr",
+      "gsul": 115.36678542527243,
+      "nic": 141.90846976898806,
+      "delta_pct": 0.16105661211816003
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Évora",
+      "janela": "Nov–Abr",
+      "gsul": 115.36678542527243,
+      "nic": 107.67447989585042,
+      "delta_pct": 0.19336650244714537
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Évora",
+      "janela": "Nov–Abr",
+      "gsul": 115.36678542527243,
+      "nic": 42.936333785334206,
+      "delta_pct": 0.4268856754036765
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Évora",
+      "janela": "Nov–Abr",
+      "gsul": 115.36678542527243,
+      "nic": 25.258452013025234,
+      "delta_pct": 0.5189249297293363
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Évora",
+      "janela": "Nov–Abr",
+      "gsul": 115.36678542527243,
+      "nic": 129.04806114259756,
+      "delta_pct": 0.20824517685207322
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Évora",
+      "janela": "Nov–Abr",
+      "gsul": 115.36678542527243,
+      "nic": 107.9867239639564,
+      "delta_pct": 0.2388813457465888
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Évora",
+      "janela": "Nov–Abr",
+      "gsul": 115.36678542527243,
+      "nic": 41.332240414417825,
+      "delta_pct": 0.41188672943248683
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Évora",
+      "janela": "Nov–Abr",
+      "gsul": 115.36678542527243,
+      "nic": 20.72459713652551,
+      "delta_pct": 0.5356968070187484
+    },
+    {
+      "rb": "RB1",
+      "cidade": "Lisboa",
+      "janela": "Nov–Abr",
+      "gsul": 115.34490591833412,
+      "nic": 77.41542571602919,
+      "delta_pct": 0.5747366563878309
+    },
+    {
+      "rb": "RB2",
+      "cidade": "Lisboa",
+      "janela": "Nov–Abr",
+      "gsul": 115.34490591833412,
+      "nic": 54.774703026103005,
+      "delta_pct": 0.7867477496963371
+    },
+    {
+      "rb": "RB3",
+      "cidade": "Lisboa",
+      "janela": "Nov–Abr",
+      "gsul": 115.34490591833412,
+      "nic": 16.21564438645026,
+      "delta_pct": 1.6348333040370866
+    },
+    {
+      "rb": "RB4",
+      "cidade": "Lisboa",
+      "janela": "Nov–Abr",
+      "gsul": 115.34490591833412,
+      "nic": 8.36903229049965,
+      "delta_pct": 1.8857737330543856
+    },
+    {
+      "rb": "RB5",
+      "cidade": "Lisboa",
+      "janela": "Nov–Abr",
+      "gsul": 115.34490591833412,
+      "nic": 68.83915898387802,
+      "delta_pct": 0.7393795858081642
+    },
+    {
+      "rb": "RB6",
+      "cidade": "Lisboa",
+      "janela": "Nov–Abr",
+      "gsul": 115.34490591833412,
+      "nic": 53.74260731908058,
+      "delta_pct": 0.974782005145336
+    },
+    {
+      "rb": "RB7",
+      "cidade": "Lisboa",
+      "janela": "Nov–Abr",
+      "gsul": 115.34490591833412,
+      "nic": 15.964254170447173,
+      "delta_pct": 1.5914850734420227
+    },
+    {
+      "rb": "RB8",
+      "cidade": "Lisboa",
+      "janela": "Nov–Abr",
+      "gsul": 115.34490591833412,
+      "nic": 6.668913838766856,
+      "delta_pct": 1.9217375324738883
+    }
+  ],
+  "resumo_por_janela": {
+    "Out–Abr": {
+      "mediana": 0.0,
+      "minimo": 0.0,
+      "maximo": 0.0,
+      "sinais": {
+        "negativos": 0,
+        "zeros": 32,
+        "positivos": 0
+      }
+    },
+    "Nov–Mar": {
+      "mediana": 0.0003680570348385537,
+      "minimo": -3.228914554941509,
+      "maximo": 4.419264759309938,
+      "sinais": {
+        "negativos": 16,
+        "zeros": 0,
+        "positivos": 16
+      }
+    },
+    "Out–Mar": {
+      "mediana": -0.6354093612760126,
+      "minimo": -4.528355164103437,
+      "maximo": 0.4502548536031492,
+      "sinais": {
+        "negativos": 24,
+        "zeros": 0,
+        "positivos": 8
+      }
+    },
+    "Nov–Abr": {
+      "mediana": 0.9673754427801606,
+      "minimo": 0.16105661211816003,
+      "maximo": 3.209998265727365,
+      "sinais": {
+        "negativos": 0,
+        "zeros": 0,
+        "positivos": 32
+      }
+    }
+  },
+  "gsul_por_cidade_e_janela": {
+    "Coimbra": {
+      "Out–Abr": 96.54242138160815,
+      "Nov–Mar": 92.19907986384824,
+      "Out–Mar": 96.09283768079735,
+      "Nov–Abr": 93.37255381761902
+    },
+    "Bragança": {
+      "Out–Abr": 110.29215203839581,
+      "Nov–Mar": 108.16349539603189,
+      "Out–Mar": 111.64751543557645,
+      "Nov–Abr": 107.16290810591191
+    },
+    "Évora": {
+      "Out–Abr": 115.95436283656433,
+      "Nov–Mar": 117.44519676444088,
+      "Out–Mar": 117.78430185442001,
+      "Nov–Abr": 115.36678542527243
+    },
+    "Lisboa": {
+      "Out–Abr": 116.71061522520073,
+      "Nov–Mar": 119.06887429586284,
+      "Out–Mar": 120.04154042428576,
+      "Nov–Abr": 115.34490591833412
+    }
+  },
+  "comparacao_LEIA_ME": {
+    "LEIA_ME": [
+      0.0,
+      -3.23,
+      4.42
+    ],
+    "observado_a_duas_casas": [
+      0.0,
+      -3.23,
+      4.42
+    ],
+    "coincide": true
+  }
+}

@@ -1,0 +1,51 @@
+[dados] estado: REVISTO [P-alfa-A13-paridade]
+== GLOBAL (n=32) ==
+  dH25 med 15.6 [-5.6, 75.5] IQR 9.6-25.9 | neg: 1
+  dH13 med 11.0 [-12.1, 54.1] IQR 1.1-26.5 | neg: 6
+  dC25 med 2.7 [-29.4, 181.5] IQR -14.3-45.6 | neg: 16
+  dC13 med 6.5 [-23.4, 164.4] IQR -9.8-33.0 | neg: 12
+
+== POR CIDADE: mediana dH25 / dH13 / dC25 / dC13 ==
+  Coimbra     22.3   18.5     1.9    15.9  (dH13 neg 1/8)
+  Bragança    12.8    4.3    78.0    51.4  (dH13 neg 2/8)
+  Évora        8.7    7.0   -23.2   -17.3  (dH13 neg 2/8)
+  Lisboa      39.1   24.7     3.2     4.5  (dH13 neg 1/8)
+
+== SFH (RB1-4) vs MFH (RB5-8): mediana dH25 / dH13 ==
+  SFH 11.9  5.1
+  MFH 20.1  12.4
+
+== EFEITO DA BASE (2013 -> DGEG2025-A), mesmo metodo, mesma altitude ==
+  aquecimento sazonal: med -0.8 [-34.6, 28.5] IQR -21.5-4.9
+  aquecimento mensal : med 5.4 [-27.2, 23.0] IQR -13.9-12.9
+  arrefec.  sazonal  : med 0.0 [-25.2, 33.2] IQR -18.7-21.1
+  arrefec.  mensal   : med -9.9 [-25.4, 56.3] IQR -21.4-26.4
+
+== Q2: celulas com Nvc(sazonal) < 4 kWh/m2.a ==
+  n=2 ; mediana dC25 91% ; max 105% (RB3/Bragança)
+  base 2013: n=4 ; mediana dC13 57% ; max 164%
+  Nvc>=4 (DGEG): n=30 ; mediana dC25 -1%
+
+== CENARIO 20C vs N_H@18 ==
+  med 49.9 [26.8, 114.8] IQR 35.4-71.6
+  Coimbra   med 48%
+  Bragança  med 29%
+  Évora     med 52%
+  Lisboa    med 87%
+
+== RB6/Coimbra: os quatro cantos, z=255 m ==
+  2013 : Nic 125.46  N_H 138.10  dH +10.1%
+  DGEG : Nic 118.17  N_H 137.65  dH +16.5%
+  naive N_H(DGEG)/Nic(2013) = +9.7%
+
+== correlacao de sinal: dH25 vs dH13 ==
+  celulas com dH negativo nas duas bases: 1
+  so na base 2013: 5
+
+== AGREGADO PONDERADO PELO STOCK (convencao Artigo 11) ==
+  DGEG2025-A  aquecimento: sazonal  102.5  mensal  113.2  -> +10.4%
+  REG-2013    aquecimento: sazonal  106.7  mensal  109.6  -> +2.8%
+  DGEG2025-A  arrefecim. : sazonal  17.40  mensal  17.23  -> -1.0%
+  REG-2013    arrefecim. : sazonal  19.10  mensal  19.01  -> -0.5%
+  media ponderada dos racios dH25 17.5% | dH13 9.8%
+  simples (nao ponderada) dH25 21.1% | dH13 13.8%
