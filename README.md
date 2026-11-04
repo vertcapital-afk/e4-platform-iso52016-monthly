@@ -168,6 +168,11 @@ Execution log of this state (4 November 2026, Python 3.10, Linux):
 | `verificar_revisao_a13.py --motor PATH --controlo-negativo` | 13/13 negative controls detected for the expected reason; exit code 0 |
 | `verificar_artigo13.py --motor PATH` | 37/37 PASS; exit code 0 (without the engine: not executed, exit code 2) |
 
+The same day, on Windows, the data checks and the negative controls with the
+engine gave the same counts. The three production scripts, run in full,
+reproduced the deposited files: 320/320 grid values; the α = 0.60 grids and
+anatomies; the 128 irradiation-window observations.
+
 The check counts announced with the submitted version (37/37 and 9/9) belong
 to that version and do not stand in for this log.
 

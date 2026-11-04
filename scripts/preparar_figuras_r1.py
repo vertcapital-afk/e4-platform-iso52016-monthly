@@ -40,7 +40,7 @@ def derivar():
     reg = [dict(rb=c["rb"], cidade=c["cidade"], **{k: round(v, 3) for k, v in c["controlo_REG2013"].items()}) for c in f["celulas"]]
     dec = [c["anatomia"] for c in i["celulas"] if c["hora"] == "verificada"]
     assert len(rows) == 32 and len(reg) == 32 and len(dec) == 32, (len(rows), len(reg), len(dec))
-    meta = {"hora": "verificada", "origem": "corridas do Sol de 30/10 (tema 1); nao e corrida nova"}
+    meta = {"hora": "verificada", "origem": "corridas de 30/10/2026 (tema 1); nao e corrida nova"}
     return {name: {"meta": meta, "celulas": data} for name, data in
             [("grelha_artigo13_REVISAO", rows), ("grelha_artigo13_2013_REVISAO", reg),
              ("decomposicao_artigo13_REVISAO", dec)]}

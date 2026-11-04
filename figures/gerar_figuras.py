@@ -177,7 +177,7 @@ fig.savefig(f"{OUT}/Fig3_heatmap_dH.pdf")
 fig.savefig(f"{OUT}/Fig3.pdf"); plt.close(fig)
 
 # ---------------------------------------------------------------- FIG 4
-# [R1 03/11, decisor] Tres contrastes nominais recuperaveis (proposta Sol, aceite):
+# [R1 03/11, decisor] Tres contrastes nominais recuperaveis (proposta de auditoria, aceite):
 # sem a barra dos +70 % (irreprodutivel) nem a dos +21 % (altitude, historica).
 c=next(c for c in D if c['rb']=='RB6' and c['cidade']=='Coimbra')
 vals=[100*(c['nh_52016']/c['nic13']-1),c['dH13'],c['dH25']]
